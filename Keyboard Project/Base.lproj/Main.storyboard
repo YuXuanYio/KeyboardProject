@@ -50,6 +50,9 @@
                                 <rect key="frame" x="648" y="416.5" width="152" height="34.5"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Read My Answer"/>
+                                <connections>
+                                    <action selector="readDigit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qVN-tC-5jP"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -76,6 +79,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Home Page" id="8th-dB-Qv2"/>
                     <connections>
+                        <outlet property="answerLabel" destination="1cU-H8-ku9" id="3tZ-Cr-cnr"/>
                         <outlet property="canvasView" destination="wjg-E9-MPo" id="PVZ-By-1oS"/>
                     </connections>
                 </viewController>

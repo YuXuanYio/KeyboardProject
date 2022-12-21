@@ -83,3 +83,15 @@ class CanvasView: UIView {
     */
 
 }
+
+extension UIImage {
+    // UIImage extension that creates a UIImage from a UIView
+    convenience init (view:UIView) {
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        self.init(cgImage: image!.cgImage!)
+    }
+
+}

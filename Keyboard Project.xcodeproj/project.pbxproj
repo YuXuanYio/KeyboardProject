@@ -13,8 +13,10 @@
 		D890939E2952906800FC8EEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D890939C2952906800FC8EEA /* Main.storyboard */; };
 		D89093A02952906D00FC8EEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D890939F2952906D00FC8EEA /* Assets.xcassets */; };
 		D89093A32952906D00FC8EEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D89093A12952906D00FC8EEA /* LaunchScreen.storyboard */; };
-		D89093AB2952BCF700FC8EEA /* MNISTClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D89093AA2952BCF700FC8EEA /* MNISTClassifier.mlmodel */; };
 		D89093AD2952BEE700FC8EEA /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89093AC2952BEE700FC8EEA /* CanvasView.swift */; };
+		D89093AF2953453B00FC8EEA /* MNISTClassifier.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = D89093AE2953453B00FC8EEA /* MNISTClassifier.mlpackage */; };
+		D89093B129534A7F00FC8EEA /* MNIST.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D89093B029534A7E00FC8EEA /* MNIST.mlmodel */; };
+		D89093B329534C9600FC8EEA /* mnistCNN.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D89093B229534C9600FC8EEA /* mnistCNN.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,8 +28,10 @@
 		D890939F2952906D00FC8EEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D89093A22952906D00FC8EEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D89093A42952906D00FC8EEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D89093AA2952BCF700FC8EEA /* MNISTClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MNISTClassifier.mlmodel; sourceTree = "<group>"; };
 		D89093AC2952BEE700FC8EEA /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
+		D89093AE2953453B00FC8EEA /* MNISTClassifier.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = MNISTClassifier.mlpackage; sourceTree = "<group>"; };
+		D89093B029534A7E00FC8EEA /* MNIST.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MNIST.mlmodel; sourceTree = "<group>"; };
+		D89093B229534C9600FC8EEA /* mnistCNN.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = mnistCNN.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +64,9 @@
 		D89093952952906800FC8EEA /* Keyboard Project */ = {
 			isa = PBXGroup;
 			children = (
-				D89093AA2952BCF700FC8EEA /* MNISTClassifier.mlmodel */,
+				D89093B229534C9600FC8EEA /* mnistCNN.mlmodel */,
+				D89093B029534A7E00FC8EEA /* MNIST.mlmodel */,
+				D89093AE2953453B00FC8EEA /* MNISTClassifier.mlpackage */,
 				D89093962952906800FC8EEA /* AppDelegate.swift */,
 				D89093982952906800FC8EEA /* SceneDelegate.swift */,
 				D890939A2952906800FC8EEA /* QnAViewController.swift */,
@@ -144,11 +150,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D89093B129534A7F00FC8EEA /* MNIST.mlmodel in Sources */,
 				D890939B2952906800FC8EEA /* QnAViewController.swift in Sources */,
 				D89093972952906800FC8EEA /* AppDelegate.swift in Sources */,
+				D89093AF2953453B00FC8EEA /* MNISTClassifier.mlpackage in Sources */,
 				D89093AD2952BEE700FC8EEA /* CanvasView.swift in Sources */,
 				D89093992952906800FC8EEA /* SceneDelegate.swift in Sources */,
-				D89093AB2952BCF700FC8EEA /* MNISTClassifier.mlmodel in Sources */,
+				D89093B329534C9600FC8EEA /* mnistCNN.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
