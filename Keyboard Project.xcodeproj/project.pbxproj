@@ -9,21 +9,25 @@
 /* Begin PBXBuildFile section */
 		D89093972952906800FC8EEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89093962952906800FC8EEA /* AppDelegate.swift */; };
 		D89093992952906800FC8EEA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89093982952906800FC8EEA /* SceneDelegate.swift */; };
-		D890939B2952906800FC8EEA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D890939A2952906800FC8EEA /* ViewController.swift */; };
+		D890939B2952906800FC8EEA /* QnAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D890939A2952906800FC8EEA /* QnAViewController.swift */; };
 		D890939E2952906800FC8EEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D890939C2952906800FC8EEA /* Main.storyboard */; };
 		D89093A02952906D00FC8EEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D890939F2952906D00FC8EEA /* Assets.xcassets */; };
 		D89093A32952906D00FC8EEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D89093A12952906D00FC8EEA /* LaunchScreen.storyboard */; };
+		D89093AB2952BCF700FC8EEA /* MNISTClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D89093AA2952BCF700FC8EEA /* MNISTClassifier.mlmodel */; };
+		D89093AD2952BEE700FC8EEA /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89093AC2952BEE700FC8EEA /* CanvasView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D89093932952906800FC8EEA /* Keyboard Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Keyboard Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D89093962952906800FC8EEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D89093982952906800FC8EEA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D890939A2952906800FC8EEA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D890939A2952906800FC8EEA /* QnAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnAViewController.swift; sourceTree = "<group>"; };
 		D890939D2952906800FC8EEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D890939F2952906D00FC8EEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D89093A22952906D00FC8EEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D89093A42952906D00FC8EEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D89093AA2952BCF700FC8EEA /* MNISTClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MNISTClassifier.mlmodel; sourceTree = "<group>"; };
+		D89093AC2952BEE700FC8EEA /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,13 +60,15 @@
 		D89093952952906800FC8EEA /* Keyboard Project */ = {
 			isa = PBXGroup;
 			children = (
+				D89093AA2952BCF700FC8EEA /* MNISTClassifier.mlmodel */,
 				D89093962952906800FC8EEA /* AppDelegate.swift */,
 				D89093982952906800FC8EEA /* SceneDelegate.swift */,
-				D890939A2952906800FC8EEA /* ViewController.swift */,
+				D890939A2952906800FC8EEA /* QnAViewController.swift */,
 				D890939C2952906800FC8EEA /* Main.storyboard */,
 				D890939F2952906D00FC8EEA /* Assets.xcassets */,
 				D89093A12952906D00FC8EEA /* LaunchScreen.storyboard */,
 				D89093A42952906D00FC8EEA /* Info.plist */,
+				D89093AC2952BEE700FC8EEA /* CanvasView.swift */,
 			);
 			path = "Keyboard Project";
 			sourceTree = "<group>";
@@ -138,9 +144,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D890939B2952906800FC8EEA /* ViewController.swift in Sources */,
+				D890939B2952906800FC8EEA /* QnAViewController.swift in Sources */,
 				D89093972952906800FC8EEA /* AppDelegate.swift in Sources */,
+				D89093AD2952BEE700FC8EEA /* CanvasView.swift in Sources */,
 				D89093992952906800FC8EEA /* SceneDelegate.swift in Sources */,
+				D89093AB2952BCF700FC8EEA /* MNISTClassifier.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
