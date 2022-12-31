@@ -11,6 +11,7 @@ import Vision
 class ViewController: UIViewController {
 
     
+    @IBOutlet weak var testImage: UIImageView!
     @IBOutlet weak var answerLabel: UILabel!
     @IBOutlet weak var canvasView: CanvasView!
     var requests = [VNRequest]()
@@ -24,7 +25,7 @@ class ViewController: UIViewController {
     func setupVision() {
         // load MNIST model for the use with the Vision framework
         let config = MLModelConfiguration()
-        guard let coreMLModel = try? MNIST(configuration: config),
+        guard let coreMLModel = try? MNISTClassifier(configuration: config),
                 let visionModel = try? VNCoreMLModel(for: coreMLModel.model) else {fatalError("Could not load Vision ML Model")}
         // create a classification request and tell it to call handleClassification once its done
         let classificationRequest = VNCoreMLRequest(model: visionModel, completionHandler: self.handleClassification)
@@ -53,6 +54,8 @@ class ViewController: UIViewController {
     @IBAction func readDigit(_ sender: Any) {
         let image = UIImage(view: canvasView) // get UIImage from CanvasView
         let scaledImage = scaleImage(image: image, toSize: CGSize(width: 28, height: 28)) // scale the image to the required size of 28x28 for better recognition results
+        
+        testImage.image = scaledImage
                 
         let imageRequestHandler = VNImageRequestHandler(cgImage: scaledImage.cgImage!, options: [:]) // create a handler that should perform the vision request
                 
