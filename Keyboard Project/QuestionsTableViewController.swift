@@ -18,7 +18,6 @@ class QuestionsTableViewController: UITableViewController, UISearchResultsUpdati
     }()
     let searchController = UISearchController(searchResultsController: nil)
 
-
     func onQuestionsChange(change: DatabaseChange, questions: [Questions]) {
         currentQuestionList = questions
         updateSearchResults(for: navigationItem.searchController!)
@@ -38,13 +37,34 @@ class QuestionsTableViewController: UITableViewController, UISearchResultsUpdati
     
     override func viewDidLoad() {
         databaseController = appDelegate.databaseController
+        tableView.reloadData()
         initSearchController()
+        self.tableView.allowsMultipleSelectionDuringEditing = true
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.editButtonItem.title = "Select"
         super.viewDidLoad()
+//        tableView.allowsMultipleSelection = true
+
 //         Uncomment the following line to preserve selection between presentations
 //         self.clearsSelectionOnViewWillAppear = false
 //
 //         Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 //         self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        if self.isEditing {
+            self.editButtonItem.title = "Proceed"
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelEditing))
+        } else {
+            self.editButtonItem.title = "Select"
+        }
+    }
+    
+    @objc func cancelEditing() {
+        self.setEditing(false, animated: true)
+        self.navigationItem.leftBarButtonItem = .none
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,11 +96,65 @@ class QuestionsTableViewController: UITableViewController, UISearchResultsUpdati
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "question", for: indexPath)
-        let question = filteredQuestionList[indexPath.row]
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor.white
+        cell.selectedBackgroundView = bgColorView
+        var question = Questions()
+        if searchController.isActive {
+            question = filteredQuestionList[indexPath.row]
+            if question.isSelected == true {
+                tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+            } else {
+                question.isSelected = false
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
+        } else {
+//            for current_question in currentQuestionList {
+//                for filter_question in filteredQuestionList {
+//                    if current_question.question == filter_question.question {
+//                        if filter_question.isSelected != current_question.isSelected {
+//                            if filter_question.isSelected == true {
+//                                current_question.isSelected = true
+//                            } else {
+//                                current_question.isSelected = false
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+            question = currentQuestionList[indexPath.row]
+            if question.isSelected == true {
+                tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+            } else {
+                question.isSelected = false
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
+        }
         var content = cell.defaultContentConfiguration()
         content.text = question.question
         cell.contentConfiguration = content
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if searchController.isActive {
+            filteredQuestionList[indexPath.row].isSelected = true
+        } else {
+            currentQuestionList[indexPath.row].isSelected = true
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if searchController.isActive {
+            filteredQuestionList[indexPath.row].isSelected = false
+        } else {
+            currentQuestionList[indexPath.row].isSelected = false
+        }
     }
 
     /*
