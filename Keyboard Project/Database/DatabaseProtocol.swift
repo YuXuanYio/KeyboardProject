@@ -17,6 +17,7 @@ enum DatabaseChange {
 
 enum ListenerType {
     case questions
+    case child
 }
 
 protocol DatabaseListener: AnyObject {
@@ -28,6 +29,8 @@ protocol DatabaseProtocol: AnyObject {
     func cleanup()
     func addListener(listener: DatabaseListener)
     func removeListener(listener: DatabaseListener)
-    func addQuestion(question: String, answer: Int)
+    func addQuestion(question: String, answer: Int) -> Questions
+    func addChild(name: String, gender: String, yearLevel: Int, date: Date) -> Child
+//    func updateStudentDetails()
     func deleteQuestion(question: Questions)
 }

@@ -16,12 +16,14 @@ class FirebaseController: NSObject, DatabaseProtocol {
     var questionList: [Questions]
     var database: Firestore
     var questionsRef: CollectionReference?
+    var childRef: CollectionReference?
 
     override init() {
         FirebaseApp.configure()
         database = Firestore.firestore()
         questionList = [Questions]()
         questionsRef = database.collection("questions")
+        childRef = database.collection("student")
         super.init()
         self.setupQuestionsListener()
     }
@@ -39,7 +41,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         listeners.removeDelegate(listener)
     }
     
-    func addQuestion(question: String, answer: Int) {
+    func addQuestion(question: String, answer: Int) -> Questions{
         let questionToAdd = Questions()
         questionToAdd.question = question
         questionToAdd.answer = answer
@@ -50,12 +52,29 @@ class FirebaseController: NSObject, DatabaseProtocol {
         } catch {
             print("Failed to serialize question")
         }
+        return questionToAdd
     }
     
     func deleteQuestion(question: Questions) {
         if let questionID = question.id {
             questionsRef?.document(questionID).delete()
         }
+    }
+    
+    func addChild(name: String, gender: String, yearLevel: Int, date: Date) -> Child {
+        let childToAdd = Child()
+        childToAdd.name = name
+        childToAdd.gender = gender
+        childToAdd.yearLevel = yearLevel
+        childToAdd.date = date
+        do {
+            if let childRef = try childRef?.addDocument(from: childToAdd) {
+                childToAdd.id = childRef.documentID
+            }
+        } catch {
+            print("Failed to serialize question")
+        }
+        return childToAdd
     }
     
     func parseQuestionsSnapshot(snapshot: QuerySnapshot) {
@@ -98,5 +117,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
             self.parseQuestionsSnapshot(snapshot: querySnapshot)
         }
     }
+    
+    
     
 }

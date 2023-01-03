@@ -12,6 +12,7 @@ class QuestionsTableViewController: UITableViewController, UISearchResultsUpdati
     var listenerType = ListenerType.questions
     var currentQuestionList: [Questions] = []
     var filteredQuestionList: [Questions] = []
+    var answersShown = false
     weak var databaseController: DatabaseProtocol?
     lazy var appDelegate = {
        return UIApplication.shared.delegate as! AppDelegate
@@ -24,17 +25,6 @@ class QuestionsTableViewController: UITableViewController, UISearchResultsUpdati
         tableView.reloadData()
     }
     
-    func initSearchController() {
-        searchController.searchBar.showsScopeBar = true
-        searchController.searchBar.scopeButtonTitles = ["All", "Addition", "Subtraction"]
-        searchController.searchBar.delegate = self
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Questions"
-        navigationItem.searchController = searchController
-        searchController.searchBar.delegate = self
-    }
-    
     override func viewDidLoad() {
         databaseController = appDelegate.databaseController
         tableView.reloadData()
@@ -43,28 +33,37 @@ class QuestionsTableViewController: UITableViewController, UISearchResultsUpdati
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         self.editButtonItem.title = "Select"
         super.viewDidLoad()
-//        tableView.allowsMultipleSelection = true
-
-//         Uncomment the following line to preserve selection between presentations
-//         self.clearsSelectionOnViewWillAppear = false
-//
-//         Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-//         self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         if self.isEditing {
-            self.editButtonItem.title = "Proceed"
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelEditing))
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Proceed", image: nil, primaryAction: nil, menu: getMenu())
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel Selection", style: .plain, target: self, action: #selector(cancelEditing))
         } else {
             self.editButtonItem.title = "Select"
         }
     }
     
+    func getMenu() -> UIMenu {
+        let displayAnswers = UIAction(title: "Display answers", image: UIImage(systemName: "eye")) { (action) in
+            self.answersShown = true
+            self.performSegue(withIdentifier: "dopeSegue", sender: nil)
+        }
+        let doNotDisplayAnswers = UIAction(title: "Do not display answers", image: UIImage(systemName: "eye.slash")) { (action) in
+            self.answersShown = false
+            self.performSegue(withIdentifier: "dopeSegue", sender: nil)
+        }
+        let menu = UIMenu(title: "Proceed and:", options: .displayInline, children: [displayAnswers , doNotDisplayAnswers])
+        return menu
+    }
+    
+    
     @objc func cancelEditing() {
         self.setEditing(false, animated: true)
         self.navigationItem.leftBarButtonItem = .none
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.editButtonItem.title = "Select"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -109,19 +108,6 @@ class QuestionsTableViewController: UITableViewController, UISearchResultsUpdati
                 tableView.deselectRow(at: indexPath, animated: true)
             }
         } else {
-//            for current_question in currentQuestionList {
-//                for filter_question in filteredQuestionList {
-//                    if current_question.question == filter_question.question {
-//                        if filter_question.isSelected != current_question.isSelected {
-//                            if filter_question.isSelected == true {
-//                                current_question.isSelected = true
-//                            } else {
-//                                current_question.isSelected = false
-//                            }
-//                        }
-//                    }
-//                }
-//            }
             question = currentQuestionList[indexPath.row]
             if question.isSelected == true {
                 tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
@@ -156,41 +142,20 @@ class QuestionsTableViewController: UITableViewController, UISearchResultsUpdati
             currentQuestionList[indexPath.row].isSelected = false
         }
     }
+    
+    // MARK: - Search Bar and Search Scope Buttons
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    // Initialisation for the search controller
+    func initSearchController() {
+        searchController.searchBar.showsScopeBar = true
+        searchController.searchBar.scopeButtonTitles = ["All", "Addition", "Subtraction"]
+        searchController.searchBar.delegate = self
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Questions"
+        navigationItem.searchController = searchController
+        searchController.searchBar.delegate = self
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
     
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
@@ -224,14 +189,23 @@ class QuestionsTableViewController: UITableViewController, UISearchResultsUpdati
         tableView.reloadData()
     }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "dopeSegue" {
+            let destination = segue.destination as! StudentDetailsViewController
+            destination.answersShown = self.answersShown
+            var tempArr: [Questions] = []
+            for question in currentQuestionList {
+                if question.isSelected == true {
+                    tempArr.append(question)
+                }
+            }
+            destination.selectedQuestionList = tempArr
+        }
     }
-    */
 
 }

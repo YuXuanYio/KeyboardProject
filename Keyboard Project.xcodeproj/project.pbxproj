@@ -26,6 +26,9 @@
 		D89093AD2952BEE700FC8EEA /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89093AC2952BEE700FC8EEA /* CanvasView.swift */; };
 		D89093B129534A7F00FC8EEA /* MNIST.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D89093B029534A7E00FC8EEA /* MNIST.mlmodel */; };
 		D89093B329534C9600FC8EEA /* mnistCNN.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D89093B229534C9600FC8EEA /* mnistCNN.mlmodel */; };
+		D8EE521729628A6900F84CEA /* StudentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EE521629628A6900F84CEA /* StudentDetailsViewController.swift */; };
+		D8EE52192963E4A400F84CEA /* Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EE52182963E4A400F84CEA /* Child.swift */; };
+		D8EE521B29642DCC00F84CEA /* QuestionsBeginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EE521A29642DCC00F84CEA /* QuestionsBeginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +51,9 @@
 		D89093AC2952BEE700FC8EEA /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		D89093B029534A7E00FC8EEA /* MNIST.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MNIST.mlmodel; sourceTree = "<group>"; };
 		D89093B229534C9600FC8EEA /* mnistCNN.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = mnistCNN.mlmodel; sourceTree = "<group>"; };
+		D8EE521629628A6900F84CEA /* StudentDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDetailsViewController.swift; sourceTree = "<group>"; };
+		D8EE52182963E4A400F84CEA /* Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Child.swift; sourceTree = "<group>"; };
+		D8EE521A29642DCC00F84CEA /* QuestionsBeginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsBeginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +113,10 @@
 				D83167312958824A00CD658E /* HomePageViewController.swift */,
 				D8316733295883C300CD658E /* QuestionsTableViewController.swift */,
 				D831673A2958874100CD658E /* Questions.swift */,
+				D8EE52182963E4A400F84CEA /* Child.swift */,
 				D831673C2958881700CD658E /* FirebaseController.swift */,
+				D8EE521629628A6900F84CEA /* StudentDetailsViewController.swift */,
+				D8EE521A29642DCC00F84CEA /* QuestionsBeginViewController.swift */,
 			);
 			path = "Keyboard Project";
 			sourceTree = "<group>";
@@ -192,15 +201,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				D89093B129534A7F00FC8EEA /* MNIST.mlmodel in Sources */,
+				D8EE521729628A6900F84CEA /* StudentDetailsViewController.swift in Sources */,
 				D8316734295883C300CD658E /* QuestionsTableViewController.swift in Sources */,
 				D890939B2952906800FC8EEA /* QnAViewController.swift in Sources */,
 				D831673B2958874100CD658E /* Questions.swift in Sources */,
 				D83167322958824A00CD658E /* HomePageViewController.swift in Sources */,
 				D80FDF27295495E400F25226 /* MNISTClassifier.mlmodel in Sources */,
 				D89093972952906800FC8EEA /* AppDelegate.swift in Sources */,
+				D8EE52192963E4A400F84CEA /* Child.swift in Sources */,
 				D89093AD2952BEE700FC8EEA /* CanvasView.swift in Sources */,
 				D83167422958885000CD658E /* MulticastDelegate.swift in Sources */,
 				D83167412958885000CD658E /* DatabaseProtocol.swift in Sources */,
+				D8EE521B29642DCC00F84CEA /* QuestionsBeginViewController.swift in Sources */,
 				D89093992952906800FC8EEA /* SceneDelegate.swift in Sources */,
 				D831673D2958881700CD658E /* FirebaseController.swift in Sources */,
 				D89093B329534C9600FC8EEA /* mnistCNN.mlmodel in Sources */,
