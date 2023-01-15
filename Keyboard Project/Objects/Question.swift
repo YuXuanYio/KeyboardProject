@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import FirebaseFirestoreSwift
 
-class Questions: NSObject, Codable {
+class Question: NSObject, Codable {
     
     @DocumentID var id: String?
     var question: String?

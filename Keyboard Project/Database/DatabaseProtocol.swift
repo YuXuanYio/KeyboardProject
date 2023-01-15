@@ -18,19 +18,19 @@ enum DatabaseChange {
 enum ListenerType {
     case questions
     case child
+    case questionsets
+    case all
 }
 
 protocol DatabaseListener: AnyObject {
     var listenerType: ListenerType {get set}
-    func onQuestionsChange(change: DatabaseChange, questions: [Questions])
+    func onQuestionsChange(change: DatabaseChange, questions: [Question])
+    func onSetsChange(change: DatabaseChange, questionSets: [QuestionSet])
 }
 
 protocol DatabaseProtocol: AnyObject {
     func cleanup()
     func addListener(listener: DatabaseListener)
     func removeListener(listener: DatabaseListener)
-    func addQuestion(question: String, answer: Int) -> Questions
-    func addChild(name: String, gender: String, yearLevel: Int, date: Date) -> Child
-//    func updateStudentDetails()
-    func deleteQuestion(question: Questions)
+    func addChild(name: String, gender: String, yearLevel: Int, date: Date) -> Student
 }

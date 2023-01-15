@@ -8,10 +8,9 @@
 import UIKit
 import Vision
 
-class ViewController: UIViewController {
+class QnAViewController: UIViewController {
 
     
-    @IBOutlet weak var testImage: UIImageView!
     @IBOutlet weak var answerLabel: UILabel!
     @IBOutlet weak var canvasView: CanvasView!
     var requests = [VNRequest]()
@@ -54,9 +53,6 @@ class ViewController: UIViewController {
     @IBAction func readDigit(_ sender: Any) {
         let image = UIImage(view: canvasView) // get UIImage from CanvasView
         let scaledImage = scaleImage(image: image, toSize: CGSize(width: 28, height: 28)) // scale the image to the required size of 28x28 for better recognition results
-        
-        testImage.image = scaledImage
-                
         let imageRequestHandler = VNImageRequestHandler(cgImage: scaledImage.cgImage!, options: [:]) // create a handler that should perform the vision request
                 
         do {

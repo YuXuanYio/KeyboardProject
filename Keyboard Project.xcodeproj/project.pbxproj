@@ -9,14 +9,16 @@
 /* Begin PBXBuildFile section */
 		D80FDF27295495E400F25226 /* MNISTClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D80FDF26295495E400F25226 /* MNISTClassifier.mlmodel */; };
 		D83167322958824A00CD658E /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83167312958824A00CD658E /* HomePageViewController.swift */; };
-		D8316734295883C300CD658E /* QuestionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8316733295883C300CD658E /* QuestionsTableViewController.swift */; };
-		D8316737295886F300CD658E /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D8316736295886F300CD658E /* FirebaseFirestore */; };
-		D8316739295886F300CD658E /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D8316738295886F300CD658E /* FirebaseFirestoreSwift */; };
-		D831673B2958874100CD658E /* Questions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D831673A2958874100CD658E /* Questions.swift */; };
+		D831673B2958874100CD658E /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = D831673A2958874100CD658E /* Question.swift */; };
 		D831673D2958881700CD658E /* FirebaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D831673C2958881700CD658E /* FirebaseController.swift */; };
 		D83167412958885000CD658E /* DatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D831673F2958884F00CD658E /* DatabaseProtocol.swift */; };
 		D83167422958885000CD658E /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83167402958884F00CD658E /* MulticastDelegate.swift */; };
 		D8316744295D339D00CD658E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8316743295D339D00CD658E /* GoogleService-Info.plist */; };
+		D867930029668D3F00FD3C36 /* QuestionSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86792FF29668D3F00FD3C36 /* QuestionSet.swift */; };
+		D890718F2966946300181380 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D890718E2966946300181380 /* FirebaseAuth */; };
+		D89071912966946300181380 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D89071902966946300181380 /* FirebaseFirestore */; };
+		D89071932966946300181380 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D89071922966946300181380 /* FirebaseFirestoreSwift */; };
+		D8907195296696B600181380 /* QuestionSetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8907194296696B600181380 /* QuestionSetTableViewController.swift */; };
 		D89093972952906800FC8EEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89093962952906800FC8EEA /* AppDelegate.swift */; };
 		D89093992952906800FC8EEA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89093982952906800FC8EEA /* SceneDelegate.swift */; };
 		D890939B2952906800FC8EEA /* QnAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D890939A2952906800FC8EEA /* QnAViewController.swift */; };
@@ -27,19 +29,20 @@
 		D89093B129534A7F00FC8EEA /* MNIST.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D89093B029534A7E00FC8EEA /* MNIST.mlmodel */; };
 		D89093B329534C9600FC8EEA /* mnistCNN.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D89093B229534C9600FC8EEA /* mnistCNN.mlmodel */; };
 		D8EE521729628A6900F84CEA /* StudentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EE521629628A6900F84CEA /* StudentDetailsViewController.swift */; };
-		D8EE52192963E4A400F84CEA /* Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EE52182963E4A400F84CEA /* Child.swift */; };
+		D8EE52192963E4A400F84CEA /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EE52182963E4A400F84CEA /* Student.swift */; };
 		D8EE521B29642DCC00F84CEA /* QuestionsBeginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EE521A29642DCC00F84CEA /* QuestionsBeginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D80FDF26295495E400F25226 /* MNISTClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MNISTClassifier.mlmodel; sourceTree = "<group>"; };
 		D83167312958824A00CD658E /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
-		D8316733295883C300CD658E /* QuestionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsTableViewController.swift; sourceTree = "<group>"; };
-		D831673A2958874100CD658E /* Questions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Questions.swift; sourceTree = "<group>"; };
+		D831673A2958874100CD658E /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		D831673C2958881700CD658E /* FirebaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseController.swift; sourceTree = "<group>"; };
 		D831673F2958884F00CD658E /* DatabaseProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseProtocol.swift; sourceTree = "<group>"; };
 		D83167402958884F00CD658E /* MulticastDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		D8316743295D339D00CD658E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D86792FF29668D3F00FD3C36 /* QuestionSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSet.swift; sourceTree = "<group>"; };
+		D8907194296696B600181380 /* QuestionSetTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSetTableViewController.swift; sourceTree = "<group>"; };
 		D89093932952906800FC8EEA /* Keyboard Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Keyboard Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D89093962952906800FC8EEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D89093982952906800FC8EEA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,7 +55,7 @@
 		D89093B029534A7E00FC8EEA /* MNIST.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MNIST.mlmodel; sourceTree = "<group>"; };
 		D89093B229534C9600FC8EEA /* mnistCNN.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = mnistCNN.mlmodel; sourceTree = "<group>"; };
 		D8EE521629628A6900F84CEA /* StudentDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDetailsViewController.swift; sourceTree = "<group>"; };
-		D8EE52182963E4A400F84CEA /* Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Child.swift; sourceTree = "<group>"; };
+		D8EE52182963E4A400F84CEA /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		D8EE521A29642DCC00F84CEA /* QuestionsBeginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsBeginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -61,8 +64,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8316737295886F300CD658E /* FirebaseFirestore in Frameworks */,
-				D8316739295886F300CD658E /* FirebaseFirestoreSwift in Frameworks */,
+				D890718F2966946300181380 /* FirebaseAuth in Frameworks */,
+				D89071912966946300181380 /* FirebaseFirestore in Frameworks */,
+				D89071932966946300181380 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,10 +76,22 @@
 		D831673E2958884F00CD658E /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				D831673C2958881700CD658E /* FirebaseController.swift */,
 				D831673F2958884F00CD658E /* DatabaseProtocol.swift */,
 				D83167402958884F00CD658E /* MulticastDelegate.swift */,
 			);
 			path = Database;
+			sourceTree = "<group>";
+		};
+		D863C91C2973BC5100D47510 /* ML related files for later */ = {
+			isa = PBXGroup;
+			children = (
+				D89093B229534C9600FC8EEA /* mnistCNN.mlmodel */,
+				D89093B029534A7E00FC8EEA /* MNIST.mlmodel */,
+				D80FDF26295495E400F25226 /* MNISTClassifier.mlmodel */,
+				D89093AC2952BEE700FC8EEA /* CanvasView.swift */,
+			);
+			path = "ML related files for later";
 			sourceTree = "<group>";
 		};
 		D890938A2952906800FC8EEA = {
@@ -97,11 +113,10 @@
 		D89093952952906800FC8EEA /* Keyboard Project */ = {
 			isa = PBXGroup;
 			children = (
+				D863C91C2973BC5100D47510 /* ML related files for later */,
+				D8EE521C296441B700F84CEA /* Objects */,
 				D8316743295D339D00CD658E /* GoogleService-Info.plist */,
 				D831673E2958884F00CD658E /* Database */,
-				D89093B229534C9600FC8EEA /* mnistCNN.mlmodel */,
-				D89093B029534A7E00FC8EEA /* MNIST.mlmodel */,
-				D80FDF26295495E400F25226 /* MNISTClassifier.mlmodel */,
 				D89093962952906800FC8EEA /* AppDelegate.swift */,
 				D89093982952906800FC8EEA /* SceneDelegate.swift */,
 				D890939A2952906800FC8EEA /* QnAViewController.swift */,
@@ -109,16 +124,22 @@
 				D890939F2952906D00FC8EEA /* Assets.xcassets */,
 				D89093A12952906D00FC8EEA /* LaunchScreen.storyboard */,
 				D89093A42952906D00FC8EEA /* Info.plist */,
-				D89093AC2952BEE700FC8EEA /* CanvasView.swift */,
 				D83167312958824A00CD658E /* HomePageViewController.swift */,
-				D8316733295883C300CD658E /* QuestionsTableViewController.swift */,
-				D831673A2958874100CD658E /* Questions.swift */,
-				D8EE52182963E4A400F84CEA /* Child.swift */,
-				D831673C2958881700CD658E /* FirebaseController.swift */,
 				D8EE521629628A6900F84CEA /* StudentDetailsViewController.swift */,
 				D8EE521A29642DCC00F84CEA /* QuestionsBeginViewController.swift */,
+				D8907194296696B600181380 /* QuestionSetTableViewController.swift */,
 			);
 			path = "Keyboard Project";
+			sourceTree = "<group>";
+		};
+		D8EE521C296441B700F84CEA /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				D831673A2958874100CD658E /* Question.swift */,
+				D8EE52182963E4A400F84CEA /* Student.swift */,
+				D86792FF29668D3F00FD3C36 /* QuestionSet.swift */,
+			);
+			path = Objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,8 +159,9 @@
 			);
 			name = "Keyboard Project";
 			packageProductDependencies = (
-				D8316736295886F300CD658E /* FirebaseFirestore */,
-				D8316738295886F300CD658E /* FirebaseFirestoreSwift */,
+				D890718E2966946300181380 /* FirebaseAuth */,
+				D89071902966946300181380 /* FirebaseFirestore */,
+				D89071922966946300181380 /* FirebaseFirestoreSwift */,
 			);
 			productName = "Keyboard Project";
 			productReference = D89093932952906800FC8EEA /* Keyboard Project.app */;
@@ -170,7 +192,7 @@
 			);
 			mainGroup = D890938A2952906800FC8EEA;
 			packageReferences = (
-				D8316735295886F300CD658E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				D890718D2966946300181380 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = D89093942952906800FC8EEA /* Products */;
 			projectDirPath = "";
@@ -202,17 +224,18 @@
 			files = (
 				D89093B129534A7F00FC8EEA /* MNIST.mlmodel in Sources */,
 				D8EE521729628A6900F84CEA /* StudentDetailsViewController.swift in Sources */,
-				D8316734295883C300CD658E /* QuestionsTableViewController.swift in Sources */,
 				D890939B2952906800FC8EEA /* QnAViewController.swift in Sources */,
-				D831673B2958874100CD658E /* Questions.swift in Sources */,
+				D831673B2958874100CD658E /* Question.swift in Sources */,
 				D83167322958824A00CD658E /* HomePageViewController.swift in Sources */,
 				D80FDF27295495E400F25226 /* MNISTClassifier.mlmodel in Sources */,
 				D89093972952906800FC8EEA /* AppDelegate.swift in Sources */,
-				D8EE52192963E4A400F84CEA /* Child.swift in Sources */,
+				D8EE52192963E4A400F84CEA /* Student.swift in Sources */,
 				D89093AD2952BEE700FC8EEA /* CanvasView.swift in Sources */,
 				D83167422958885000CD658E /* MulticastDelegate.swift in Sources */,
 				D83167412958885000CD658E /* DatabaseProtocol.swift in Sources */,
 				D8EE521B29642DCC00F84CEA /* QuestionsBeginViewController.swift in Sources */,
+				D8907195296696B600181380 /* QuestionSetTableViewController.swift in Sources */,
+				D867930029668D3F00FD3C36 /* QuestionSet.swift in Sources */,
 				D89093992952906800FC8EEA /* SceneDelegate.swift in Sources */,
 				D831673D2958881700CD658E /* FirebaseController.swift in Sources */,
 				D89093B329534C9600FC8EEA /* mnistCNN.mlmodel in Sources */,
@@ -435,7 +458,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D8316735295886F300CD658E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		D890718D2966946300181380 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
@@ -446,14 +469,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D8316736295886F300CD658E /* FirebaseFirestore */ = {
+		D890718E2966946300181380 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D8316735295886F300CD658E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = D890718D2966946300181380 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		D89071902966946300181380 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D890718D2966946300181380 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
 		};
-		D8316738295886F300CD658E /* FirebaseFirestoreSwift */ = {
+		D89071922966946300181380 /* FirebaseFirestoreSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D8316735295886F300CD658E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = D890718D2966946300181380 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
