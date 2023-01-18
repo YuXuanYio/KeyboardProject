@@ -8,12 +8,14 @@
 import UIKit
 
 class QuestionsBeginViewController: UIViewController, UITextFieldDelegate {
-
+    
     var selectedQuestionList: [Question] = []
     var answersShown: Bool = false
     var currentStudent = Student()
     var counter = 1
-
+    var startTime: Date!
+    var elaspedTime: Double = 0
+    
     @IBOutlet weak var responseLabel: UILabel!
     @IBOutlet weak var questionNumberLabel: UILabel!
     @IBOutlet weak var questionLabel: UILabel!
@@ -29,46 +31,82 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        while counter < selectedQuestionList.count {
-//            questionLabel.text = selectedQuestionList[counter].question
-//            questionNumberLabel.text = String(counter + 1)
-//        }
         questionLabel.text = selectedQuestionList[0].question
         questionNumberLabel.text = "Question " + String(counter) + ":"
         responseLabel.text = "Your response: "
+        initTextField()
+        startTimer()
+        self.navigationItem.hidesBackButton = true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let allowedCharacters = CharacterSet.decimalDigits
+        let characterSet = CharacterSet(charactersIn: string)
+        return allowedCharacters.isSuperset(of: characterSet)
+    }
+    
+    func initTextField() {
         textField.delegate = self
-        // Do any additional setup after loading the view.
+        textField.inputView = UIView()
+        textField.tintColor = .clear
+        textField.smartDashesType = .no
+        textField.smartQuotesType = .no
+        textField.inputAssistantItem.leadingBarButtonGroups = []
+        textField.inputAssistantItem.trailingBarButtonGroups = []
+        textField.allowsEditingTextAttributes = false
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        print("Started")
+        endTimer()
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        print("Ended")
+    func startTimer() {
+        startTime = Date()
+    }
+    
+    func endTimer() {
+        elaspedTime = Date().timeIntervalSince(startTime)
+        print("Elapsed time: \(self.elaspedTime) seconds")
     }
     
     func displayReadAnswersMessage(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message,  preferredStyle: .alert)
-        let alertActionNo = UIAlertAction(title: "No", style: .default, handler: nil)
+        let alertActionNo = UIAlertAction(title: "No", style: .default) {
+            (action) in
+            self.textField.resignFirstResponder()
+        }
         let alertActionYes = UIAlertAction(title: "Yes!", style: .default) {
             (action) in
-            if self.counter < self.selectedQuestionList.count {
-                self.counter += 1
-                self.questionLabel.text = self.selectedQuestionList[self.counter - 1].question
-                self.questionNumberLabel.text = "Question " + String(self.counter) + ":"
-                self.textField.text = ""
-                self.textField.resignFirstResponder()
-            } else {
-                // End the question set here. Depending on whether display answer or not.
-                return
-            }
+            self.addNextquestionButtons()
         }
         alertController.addAction(alertActionNo)
         alertController.addAction(alertActionYes)
         self.present(alertController, animated: true, completion: nil)
     }
+    
+    @objc func readyForNextProblem() {
+        if self.counter < self.selectedQuestionList.count {
+            self.removeNextQuestionButtons()
+            self.counter += 1
+            self.questionLabel.text = self.selectedQuestionList[self.counter - 1].question
+            self.questionNumberLabel.text = "Question " + String(self.counter) + ":"
+            self.textField.text = ""
+            self.textField.resignFirstResponder()
+            self.startTimer()
+        } else {
+            // End the question set here. Depending on whether display answer or not.
+            return
+        }
+    }
+    
+    func removeNextQuestionButtons() {
+        self.navigationItem.rightBarButtonItem = .none
 
+    }
+    
+    func addNextquestionButtons() {
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Ready for next problem", style: .plain, target: self, action: #selector(self.readyForNextProblem))
+    }
     /*
     // MARK: - Navigation
 
