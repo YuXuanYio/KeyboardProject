@@ -6,15 +6,26 @@
 //
 
 import UIKit
+import CSV
 
-class QuestionsBeginViewController: UIViewController, UITextFieldDelegate {
+class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, DatabaseListener {
     
+    var listenerType: ListenerType = .child
     var selectedQuestionList: [Question] = []
     var answersShown: Bool = false
     var currentStudent = Student()
     var counter = 1
     var startTime: Date!
     var elaspedTime: Double = 0
+    weak var databaseController: DatabaseProtocol?
+    lazy var appDelegate = {
+        return UIApplication.shared.delegate as! AppDelegate
+    }()
+    let csv = try! CSVWriter(stream: .toMemory())
+    var clearButtonPressed = false
+    var reactionTime = ""
+    var commentsRecorded = false
+    var currentQuestion = Question()
     
     @IBOutlet weak var responseLabel: UILabel!
     @IBOutlet weak var questionNumberLabel: UILabel!
@@ -22,21 +33,54 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var textField: UITextField!
     
     @IBAction func readAnswerButton(_ sender: Any) {
+        var answerCorrect = "0"
+        if textField.text == String(self.currentQuestion.answer ?? 0) {
+            answerCorrect = "1"
+        }
+        if clearButtonPressed == false {
+            try! csv.write(field: textField.text ?? "")
+            try! csv.write(field: "-")
+            try! csv.write(field: "-")
+            try! csv.write(field: answerCorrect)
+            try! csv.write(field: String(reactionTime))
+        } else {
+            try! csv.write(field: textField.text ?? "")
+            try! csv.write(field: textField.text ?? "")
+            try! csv.write(field: answerCorrect)
+            try! csv.write(field: String(reactionTime))
+        }
         displayReadAnswersMessage(title: "Confirmation", message: "Is this your answer: " + (textField.text ?? "0") + "?")
     }
     
     @IBAction func clearButton(_ sender: Any) {
+        clearButtonPressed = true
+        try! csv.write(field: textField.text ?? "")
         textField.text = ""
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        databaseController = appDelegate.databaseController
+        currentQuestion = selectedQuestionList[0]
         questionLabel.text = selectedQuestionList[0].question
         questionNumberLabel.text = "Question " + String(counter) + ":"
         responseLabel.text = "Your response: "
         initTextField()
         startTimer()
         self.navigationItem.hidesBackButton = true
+        try! csv.write(row: ["Name", "Date", "Problem", "Initial Answer", "Corrected Answer", "Changed Answer", "Correct", "Reaction Time", "Comments"])
+        beginNewCSVRow()
+        try! csv.write(field: selectedQuestionList[0].question ?? "")
+    }
+    
+    func beginNewCSVRow() {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yy"
+        let today = formatter.string(from: date)
+        csv.beginNewRow()
+        try! csv.write(field: currentStudent.name ?? "")
+        try! csv.write(field: today)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -57,7 +101,9 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        endTimer()
+        if textField.text == "" {
+            endTimer()
+        }
     }
     
     func startTimer() {
@@ -67,6 +113,7 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate {
     func endTimer() {
         elaspedTime = Date().timeIntervalSince(startTime)
         print("Elapsed time: \(self.elaspedTime) seconds")
+        reactionTime = String(format: "%.2f", elaspedTime)
     }
     
     func displayReadAnswersMessage(title: String, message: String) {
@@ -84,29 +131,69 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    func removeNextQuestionButtons() {
+        self.navigationItem.rightBarButtonItems = .none
+
+    }
+    
+    func addNextquestionButtons() {
+        let nextProblemButton = UIBarButtonItem(title: "Ready for next problem", style: .plain, target: self, action: #selector(self.readyForNextProblem))
+        let commentButton = UIBarButtonItem(image: UIImage(named: "mic"), style: .plain, target: self, action: #selector(self.recordComment))
+        self.navigationItem.rightBarButtonItems = [nextProblemButton, commentButton]
+    }
+    
     @objc func readyForNextProblem() {
+        self.removeNextQuestionButtons()
+        if commentsRecorded == false {
+            try! csv.write(field: "-")
+        }
         if self.counter < self.selectedQuestionList.count {
-            self.removeNextQuestionButtons()
             self.counter += 1
+            clearButtonPressed = false
+            currentQuestion = self.selectedQuestionList[self.counter - 1]
             self.questionLabel.text = self.selectedQuestionList[self.counter - 1].question
+            // Writing question name to csv file.
+            beginNewCSVRow()
+            try! csv.write(field: self.selectedQuestionList[self.counter - 1].question ?? "")
             self.questionNumberLabel.text = "Question " + String(self.counter) + ":"
             self.textField.text = ""
             self.textField.resignFirstResponder()
             self.startTimer()
         } else {
             // End the question set here. Depending on whether display answer or not.
-            return
+            csv.stream.close()
+
+            // Get the data from the CSV file as a string
+            let csvData = csv.stream.property(forKey: .dataWrittenToMemoryStreamKey) as! Data
+            let csvString = String(data: csvData, encoding: .utf8)!
+            print(csvString)
+            databaseController?.addCSVFile(data: csvString, studentName: currentStudent.name ?? "")
         }
     }
     
-    func removeNextQuestionButtons() {
-        self.navigationItem.rightBarButtonItem = .none
-
+    @objc func recordComment() {
+        //TODO: Add functionality here to allow user to record a comment and prefferably translate it into text and save to csv file.
+        // Create a new CSV file with the given headers
+//        let csv = try! CSVWriter(stream: .toMemory())
+//        try! csv.write(row: ["id", "name"])
+//
+//
+//        // Add some data to the CSV file
+//        csv.beginNewRow()
+//        try! csv.write(field: "1")
+//        try! csv.write(field: "foo")
+//        csv.beginNewRow()
+//        try! csv.write(field: "2")
+//        try! csv.write(field: "bar")
+//        csv.stream.close()
+//
+//        // Get the data from the CSV file as a string
+//        let csvData = csv.stream.property(forKey: .dataWrittenToMemoryStreamKey) as! Data
+//        let csvString = String(data: csvData, encoding: .utf8)!
+//        print(csvString)
+//        databaseController?.addCSVFile(data: csvString, studentName: "test")
     }
     
-    func addNextquestionButtons() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Ready for next problem", style: .plain, target: self, action: #selector(self.readyForNextProblem))
-    }
     /*
     // MARK: - Navigation
 
@@ -116,5 +203,13 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func onQuestionsChange(change: DatabaseChange, questions: [Question]) {
+        return
+    }
+    
+    func onSetsChange(change: DatabaseChange, questionSets: [QuestionSet]) {
+        return
+    }
 
 }

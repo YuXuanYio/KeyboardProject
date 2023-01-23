@@ -14,6 +14,7 @@
 		D83167412958885000CD658E /* DatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D831673F2958884F00CD658E /* DatabaseProtocol.swift */; };
 		D83167422958885000CD658E /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83167402958884F00CD658E /* MulticastDelegate.swift */; };
 		D8316744295D339D00CD658E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8316743295D339D00CD658E /* GoogleService-Info.plist */; };
+		D863C91F2977FD5800D47510 /* CSV in Frameworks */ = {isa = PBXBuildFile; productRef = D863C91E2977FD5800D47510 /* CSV */; };
 		D867930029668D3F00FD3C36 /* QuestionSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86792FF29668D3F00FD3C36 /* QuestionSet.swift */; };
 		D890718F2966946300181380 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D890718E2966946300181380 /* FirebaseAuth */; };
 		D89071912966946300181380 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D89071902966946300181380 /* FirebaseFirestore */; };
@@ -67,6 +68,7 @@
 				D890718F2966946300181380 /* FirebaseAuth in Frameworks */,
 				D89071912966946300181380 /* FirebaseFirestore in Frameworks */,
 				D89071932966946300181380 /* FirebaseFirestoreSwift in Frameworks */,
+				D863C91F2977FD5800D47510 /* CSV in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +164,7 @@
 				D890718E2966946300181380 /* FirebaseAuth */,
 				D89071902966946300181380 /* FirebaseFirestore */,
 				D89071922966946300181380 /* FirebaseFirestoreSwift */,
+				D863C91E2977FD5800D47510 /* CSV */,
 			);
 			productName = "Keyboard Project";
 			productReference = D89093932952906800FC8EEA /* Keyboard Project.app */;
@@ -193,6 +196,7 @@
 			mainGroup = D890938A2952906800FC8EEA;
 			packageReferences = (
 				D890718D2966946300181380 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				D863C91D2977FD5800D47510 /* XCRemoteSwiftPackageReference "CSV" */,
 			);
 			productRefGroup = D89093942952906800FC8EEA /* Products */;
 			projectDirPath = "";
@@ -458,6 +462,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D863C91D2977FD5800D47510 /* XCRemoteSwiftPackageReference "CSV" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yaslab/CSV.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		D890718D2966946300181380 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -469,6 +481,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D863C91E2977FD5800D47510 /* CSV */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D863C91D2977FD5800D47510 /* XCRemoteSwiftPackageReference "CSV" */;
+			productName = CSV;
+		};
 		D890718E2966946300181380 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D890718D2966946300181380 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

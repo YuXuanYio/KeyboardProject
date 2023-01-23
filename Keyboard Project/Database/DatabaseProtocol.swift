@@ -33,4 +33,5 @@ protocol DatabaseProtocol: AnyObject {
     func addListener(listener: DatabaseListener)
     func removeListener(listener: DatabaseListener)
     func addChild(name: String, gender: String, yearLevel: Int, date: Date) -> Student
+    func addCSVFile(data: String, studentName: String)
 }

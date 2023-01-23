@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import Firebase
+import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 class FirebaseController: NSObject, DatabaseProtocol {
@@ -19,18 +20,24 @@ class FirebaseController: NSObject, DatabaseProtocol {
     var questionsRef: CollectionReference?
     var childRef: CollectionReference?
     var questionSetRef: CollectionReference?
+    var csvRef: CollectionReference?
 
     override init() {
         FirebaseApp.configure()
         database = Firestore.firestore()
         questionList = [Question]()
         questionSetList = [QuestionSet]()
+        super.init()
+        initDatabaseRef()
+        self.setupQuestionsListener()
+        self.setupQuestionSetListener()
+    }
+    
+    func initDatabaseRef() {
         questionsRef = database.collection("questions")
         childRef = database.collection("student")
         questionSetRef = database.collection("questionsets")
-        super.init()
-        self.setupQuestionsListener()
-        self.setupQuestionSetListener()
+        csvRef = database.collection("csvfiles")
     }
     
     func cleanup() {}
@@ -63,6 +70,17 @@ class FirebaseController: NSObject, DatabaseProtocol {
             print("Failed to serialize question")
         }
         return childToAdd
+    }
+    
+    func addCSVFile(data: String, studentName: String) {
+        csvRef?.addDocument(data: ["data": data, "studentName": studentName]) {
+            error in
+            if let error = error {
+                print("Error adding document: \(error)")
+            } else {
+                print("Document added successfully")
+            }
+        }
     }
     
     func parseQuestionSetSnapshot(snapshot: QueryDocumentSnapshot) {
