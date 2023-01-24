@@ -9,8 +9,9 @@ import UIKit
 
 class QuestionSetTableViewController: UITableViewController, DatabaseListener {
     
-    var listenerType = ListenerType.questionsets
+    var listenerType = ListenerType.all
     var currentQuestionSets: [QuestionSet] = []
+    var currentQuestions: [Question] = []
     weak var databaseController: DatabaseProtocol?
     lazy var appDelegate = {
         return UIApplication.shared.delegate as! AppDelegate
@@ -23,12 +24,13 @@ class QuestionSetTableViewController: UITableViewController, DatabaseListener {
     }
     
     func onQuestionsChange(change: DatabaseChange, questions: [Question]) {
-        return
+        currentQuestions = questions
     }
     
     func onSetsChange(change: DatabaseChange, questionSets: [QuestionSet]) {
         currentQuestionSets = questionSets
         currentQuestionSets = currentQuestionSets.sorted(by: {$0.name ?? "" < $1.name ?? ""})
+        print(currentQuestionSets)
         tableView.reloadData()
     }
     

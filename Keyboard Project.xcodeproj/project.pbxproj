@@ -15,6 +15,7 @@
 		D83167422958885000CD658E /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83167402958884F00CD658E /* MulticastDelegate.swift */; };
 		D8316744295D339D00CD658E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8316743295D339D00CD658E /* GoogleService-Info.plist */; };
 		D863C91F2977FD5800D47510 /* CSV in Frameworks */ = {isa = PBXBuildFile; productRef = D863C91E2977FD5800D47510 /* CSV */; };
+		D863C92E297F5B7400D47510 /* InstantSearchVoiceOverlay in Frameworks */ = {isa = PBXBuildFile; productRef = D863C92D297F5B7400D47510 /* InstantSearchVoiceOverlay */; };
 		D867930029668D3F00FD3C36 /* QuestionSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86792FF29668D3F00FD3C36 /* QuestionSet.swift */; };
 		D890718F2966946300181380 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D890718E2966946300181380 /* FirebaseAuth */; };
 		D89071912966946300181380 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D89071902966946300181380 /* FirebaseFirestore */; };
@@ -68,6 +69,7 @@
 				D890718F2966946300181380 /* FirebaseAuth in Frameworks */,
 				D89071912966946300181380 /* FirebaseFirestore in Frameworks */,
 				D89071932966946300181380 /* FirebaseFirestoreSwift in Frameworks */,
+				D863C92E297F5B7400D47510 /* InstantSearchVoiceOverlay in Frameworks */,
 				D863C91F2977FD5800D47510 /* CSV in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,6 +167,7 @@
 				D89071902966946300181380 /* FirebaseFirestore */,
 				D89071922966946300181380 /* FirebaseFirestoreSwift */,
 				D863C91E2977FD5800D47510 /* CSV */,
+				D863C92D297F5B7400D47510 /* InstantSearchVoiceOverlay */,
 			);
 			productName = "Keyboard Project";
 			productReference = D89093932952906800FC8EEA /* Keyboard Project.app */;
@@ -197,6 +200,7 @@
 			packageReferences = (
 				D890718D2966946300181380 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				D863C91D2977FD5800D47510 /* XCRemoteSwiftPackageReference "CSV" */,
+				D863C92C297F5B7400D47510 /* XCRemoteSwiftPackageReference "voice-overlay-ios" */,
 			);
 			productRefGroup = D89093942952906800FC8EEA /* Products */;
 			projectDirPath = "";
@@ -392,6 +396,8 @@
 				DEVELOPMENT_TEAM = VYTRK8Y2NU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Keyboard Project/Info.plist";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone usage for students to record comments";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Speech recognition to convert student comments to text";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -420,6 +426,8 @@
 				DEVELOPMENT_TEAM = VYTRK8Y2NU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Keyboard Project/Info.plist";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone usage for students to record comments";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Speech recognition to convert student comments to text";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -470,6 +478,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		D863C92C297F5B7400D47510 /* XCRemoteSwiftPackageReference "voice-overlay-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/algolia/voice-overlay-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		D890718D2966946300181380 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -485,6 +501,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D863C91D2977FD5800D47510 /* XCRemoteSwiftPackageReference "CSV" */;
 			productName = CSV;
+		};
+		D863C92D297F5B7400D47510 /* InstantSearchVoiceOverlay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D863C92C297F5B7400D47510 /* XCRemoteSwiftPackageReference "voice-overlay-ios" */;
+			productName = InstantSearchVoiceOverlay;
 		};
 		D890718E2966946300181380 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;

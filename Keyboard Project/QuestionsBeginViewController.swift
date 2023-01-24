@@ -7,6 +7,7 @@
 
 import UIKit
 import CSV
+import InstantSearchVoiceOverlay
 
 class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, DatabaseListener {
     
@@ -26,6 +27,8 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
     var reactionTime = ""
     var commentsRecorded = false
     var currentQuestion = Question()
+    let voiceOverlayController = VoiceOverlayController()
+    var questionComments = ""
     
     @IBOutlet weak var responseLabel: UILabel!
     @IBOutlet weak var questionNumberLabel: UILabel!
@@ -146,10 +149,13 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         self.removeNextQuestionButtons()
         if commentsRecorded == false {
             try! csv.write(field: "-")
+        } else {
+            try! csv.write(field: questionComments)
         }
         if self.counter < self.selectedQuestionList.count {
             self.counter += 1
             clearButtonPressed = false
+            commentsRecorded = false
             currentQuestion = self.selectedQuestionList[self.counter - 1]
             self.questionLabel.text = self.selectedQuestionList[self.counter - 1].question
             // Writing question name to csv file.
@@ -172,26 +178,17 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
     }
     
     @objc func recordComment() {
-        //TODO: Add functionality here to allow user to record a comment and prefferably translate it into text and save to csv file.
-        // Create a new CSV file with the given headers
-//        let csv = try! CSVWriter(stream: .toMemory())
-//        try! csv.write(row: ["id", "name"])
-//
-//
-//        // Add some data to the CSV file
-//        csv.beginNewRow()
-//        try! csv.write(field: "1")
-//        try! csv.write(field: "foo")
-//        csv.beginNewRow()
-//        try! csv.write(field: "2")
-//        try! csv.write(field: "bar")
-//        csv.stream.close()
-//
-//        // Get the data from the CSV file as a string
-//        let csvData = csv.stream.property(forKey: .dataWrittenToMemoryStreamKey) as! Data
-//        let csvString = String(data: csvData, encoding: .utf8)!
-//        print(csvString)
-//        databaseController?.addCSVFile(data: csvString, studentName: "test")
+        commentsRecorded = true
+        voiceOverlayController.settings.layout.inputScreen.titleListening = "Record your comment"
+        voiceOverlayController.settings.layout.inputScreen.subtitleBulletList = ["This is really easy!"]
+        voiceOverlayController.settings.layout.inputScreen.titleInProgress = "You said: "
+        voiceOverlayController.start(on: self, textHandler: { text, final, _  in
+            if final {
+                self.questionComments = String(describing: text)
+            }
+        }, errorHandler: { (error) in
+            print("voice output: error \(String(describing: error))")
+        })
     }
     
     /*

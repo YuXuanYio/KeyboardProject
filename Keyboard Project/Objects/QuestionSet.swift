@@ -13,7 +13,7 @@ class QuestionSet: NSObject, Codable {
     
     @DocumentID var id: String?
     var name: String?
-    var questions: [Question] = []
+    var questions = [Question]()
     
     enum CodingKeys: String, CodingKey {
         case id

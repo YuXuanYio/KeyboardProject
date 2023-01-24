@@ -30,7 +30,6 @@ class FirebaseController: NSObject, DatabaseProtocol {
         super.init()
         initDatabaseRef()
         self.setupQuestionsListener()
-        self.setupQuestionSetListener()
     }
     
     func initDatabaseRef() {
@@ -88,6 +87,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         tempQuestionSet.name = snapshot.data()["name"] as? String
         tempQuestionSet.id = snapshot.documentID
         if let questionsReferences = snapshot.data()["questions"] as? [DocumentReference] {
+            print(questionList)
             for reference in questionsReferences {
                 if let question = getQuestionByID(id: reference.documentID) {
                     tempQuestionSet.questions.append(question)
@@ -163,11 +163,12 @@ class FirebaseController: NSObject, DatabaseProtocol {
             }
             listeners.invoke {
                 (listener) in
-                if listener.listenerType == ListenerType.questions {
+                if listener.listenerType == ListenerType.questions || listener.listenerType == ListenerType.all {
                     listener.onQuestionsChange(change: .update, questions: questionList)
                 }
             }
         }
+        self.setupQuestionSetListener()
     }
     
     func setupQuestionsListener() {
