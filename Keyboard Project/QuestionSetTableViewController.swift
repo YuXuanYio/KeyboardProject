@@ -30,7 +30,6 @@ class QuestionSetTableViewController: UITableViewController, DatabaseListener {
     func onSetsChange(change: DatabaseChange, questionSets: [QuestionSet]) {
         currentQuestionSets = questionSets
         currentQuestionSets = currentQuestionSets.sorted(by: {$0.name ?? "" < $1.name ?? ""})
-        print(currentQuestionSets)
         tableView.reloadData()
     }
     

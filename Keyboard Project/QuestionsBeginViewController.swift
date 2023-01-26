@@ -7,9 +7,9 @@
 
 import UIKit
 import CSV
-import InstantSearchVoiceOverlay
+import Speech
 
-class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, DatabaseListener {
+class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, DatabaseListener, SFSpeechRecognizerDelegate {
     
     var listenerType: ListenerType = .child
     var selectedQuestionList: [Question] = []
@@ -27,9 +27,15 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
     var reactionTime = ""
     var commentsRecorded = false
     var currentQuestion = Question()
-    let voiceOverlayController = VoiceOverlayController()
-    var questionComments = ""
-    
+    var tempQuestionComments = ""
+    var finalQuestionComments = ""
+    let audioEngine = AVAudioEngine()
+    let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer()
+    let request = SFSpeechAudioBufferRecognitionRequest()
+    var task: SFSpeechRecognitionTask!
+    var isStarted: Bool = false
+
+        
     @IBOutlet weak var responseLabel: UILabel!
     @IBOutlet weak var questionNumberLabel: UILabel!
     @IBOutlet weak var questionLabel: UILabel!
@@ -74,6 +80,7 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         try! csv.write(row: ["Name", "Date", "Problem", "Initial Answer", "Corrected Answer", "Changed Answer", "Correct", "Reaction Time", "Comments"])
         beginNewCSVRow()
         try! csv.write(field: selectedQuestionList[0].question ?? "")
+        requestPermissionForMic()
     }
     
     func beginNewCSVRow() {
@@ -141,16 +148,17 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
     
     func addNextquestionButtons() {
         let nextProblemButton = UIBarButtonItem(title: "Ready for next problem", style: .plain, target: self, action: #selector(self.readyForNextProblem))
-        let commentButton = UIBarButtonItem(image: UIImage(named: "mic"), style: .plain, target: self, action: #selector(self.recordComment))
+        let commentButton = UIBarButtonItem(title: "Record a comment", style: .plain, target: self, action: #selector(self.recordComment))
         self.navigationItem.rightBarButtonItems = [nextProblemButton, commentButton]
     }
     
     @objc func readyForNextProblem() {
         self.removeNextQuestionButtons()
+        print(finalQuestionComments)
         if commentsRecorded == false {
             try! csv.write(field: "-")
         } else {
-            try! csv.write(field: questionComments)
+            try! csv.write(field: finalQuestionComments)
         }
         if self.counter < self.selectedQuestionList.count {
             self.counter += 1
@@ -179,16 +187,78 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
     
     @objc func recordComment() {
         commentsRecorded = true
-        voiceOverlayController.settings.layout.inputScreen.titleListening = "Record your comment"
-        voiceOverlayController.settings.layout.inputScreen.subtitleBulletList = ["This is really easy!"]
-        voiceOverlayController.settings.layout.inputScreen.titleInProgress = "You said: "
-        voiceOverlayController.start(on: self, textHandler: { text, final, _  in
-            if final {
-                self.questionComments = String(describing: text)
+        isStarted = !isStarted
+        if isStarted {
+            let nextProblemButton = UIBarButtonItem(title: "Ready for next problem", style: .plain, target: self, action: #selector(self.readyForNextProblem))
+            let commentButton = UIBarButtonItem(title: "Stop Recording", style: .plain, target: self, action: #selector(self.recordComment))
+            self.navigationItem.rightBarButtonItems = [nextProblemButton, commentButton]
+            startSpeechRecognition()
+        } else {
+            addNextquestionButtons()
+            cancelSpeechRecognition()
+        }
+    }
+    
+    func startSpeechRecognition() {
+        let node = audioEngine.inputNode
+        let recordingFormat = node.outputFormat(forBus: 0)
+        node.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) {
+            (buffer, _) in
+            self.request.append(buffer)
+        }
+        audioEngine.prepare()
+        do {
+            try audioEngine.start()
+        } catch {
+            displayMessage(title: "Error", message: "")
+        }
+        guard let myRecognition = SFSpeechRecognizer() else {
+            self.displayMessage(title: "Error", message: "Speech recognition is not available on your device")
+            return
+        }
+        if !myRecognition.isAvailable {
+            self.displayMessage(title: "Error", message: "Recognition is not available right now")
+        }
+        task = speechRecognizer?.recognitionTask(with: request, resultHandler: {
+            (response, error) in
+            guard let response = response else {
+                if error != nil {
+                    print(error.debugDescription)
+                } else {
+                    print("Unable to provide a response")
+                }
+                return
             }
-        }, errorHandler: { (error) in
-            print("voice output: error \(String(describing: error))")
+            let message = response.bestTranscription.formattedString
+            self.tempQuestionComments = message
         })
+    }
+    
+    func cancelSpeechRecognition() {
+        task.finish()
+        task.cancel()
+        task = nil
+        request.endAudio()
+        audioEngine.stop()
+        audioEngine.inputNode.removeTap(onBus: 0)
+        finalQuestionComments = tempQuestionComments
+    }
+    
+    func requestPermissionForMic() {
+        SFSpeechRecognizer.requestAuthorization {
+            (authState) in
+            OperationQueue.main.addOperation {
+                if authState == .authorized {
+                    print("ACCEPTED")
+                } else if authState == .denied {
+                    self.displayMessage(title: "User denied permission", message: "Please enable microphone permissions in the settings")
+                } else if authState == .notDetermined {
+                    self.displayMessage(title: "Error", message: "Speech recognition unavailable on this device")
+                } else if authState == .restricted {
+                    self.displayMessage(title: "Error", message: "This device is restricted from using speech recognition")
+                }
+            }
+        }
     }
     
     /*
@@ -200,6 +270,13 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func displayMessage(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+    }
+
     
     func onQuestionsChange(change: DatabaseChange, questions: [Question]) {
         return
