@@ -41,25 +41,6 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
     
-    @IBAction func readAnswerButton(_ sender: Any) {
-        var answerCorrect = "0"
-        if textField.text == String(self.currentQuestion.answer ?? 0) {
-            answerCorrect = "1"
-        }
-        if clearButtonPressed == false {
-            try! csv.write(field: textField.text ?? "")
-            try! csv.write(field: "-")
-            try! csv.write(field: "-")
-            try! csv.write(field: answerCorrect)
-            try! csv.write(field: String(reactionTime))
-        } else {
-            try! csv.write(field: textField.text ?? "")
-            try! csv.write(field: textField.text ?? "")
-            try! csv.write(field: answerCorrect)
-            try! csv.write(field: String(reactionTime))
-        }
-        displayReadAnswersMessage(title: "Confirmation", message: "Is this your answer: " + (textField.text ?? "0") + "?")
-    }
     
     @IBAction func clearButton(_ sender: Any) {
         clearButtonPressed = true
@@ -77,7 +58,7 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         initTextField()
         startTimer()
         self.navigationItem.hidesBackButton = true
-        try! csv.write(row: ["Name", "Date", "Problem", "Initial Answer", "Corrected Answer", "Changed Answer", "Correct", "Reaction Time", "Comments"])
+        try! csv.write(row: ["Name", "Date", "Problem", "Initial Answer", "Changed Answer", "Correct", "Reaction Time", "Comments"])
         beginNewCSVRow()
         try! csv.write(field: selectedQuestionList[0].question ?? "")
         requestPermissionForMic()
@@ -96,6 +77,7 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let allowedCharacters = CharacterSet.decimalDigits
         let characterSet = CharacterSet(charactersIn: string)
+        addNextquestionButtons()
         return allowedCharacters.isSuperset(of: characterSet)
     }
     
@@ -126,21 +108,6 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         reactionTime = String(format: "%.2f", elaspedTime)
     }
     
-    func displayReadAnswersMessage(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message,  preferredStyle: .alert)
-        let alertActionNo = UIAlertAction(title: "No", style: .default) {
-            (action) in
-            self.textField.resignFirstResponder()
-        }
-        let alertActionYes = UIAlertAction(title: "Yes!", style: .default) {
-            (action) in
-            self.addNextquestionButtons()
-        }
-        alertController.addAction(alertActionNo)
-        alertController.addAction(alertActionYes)
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
     func removeNextQuestionButtons() {
         self.navigationItem.rightBarButtonItems = .none
 
@@ -153,6 +120,20 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
     }
     
     @objc func readyForNextProblem() {
+        var answerCorrect = "0"
+        if textField.text == String(self.currentQuestion.answer ?? 0) {
+            answerCorrect = "1"
+        }
+        if clearButtonPressed == false {
+            try! csv.write(field: textField.text ?? "")
+            try! csv.write(field: "-")
+            try! csv.write(field: answerCorrect)
+            try! csv.write(field: String(reactionTime))
+        } else {
+            try! csv.write(field: textField.text ?? "")
+            try! csv.write(field: answerCorrect)
+            try! csv.write(field: String(reactionTime))
+        }
         self.removeNextQuestionButtons()
         print(finalQuestionComments)
         if commentsRecorded == false {
@@ -182,6 +163,7 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
             let csvString = String(data: csvData, encoding: .utf8)!
             print(csvString)
             databaseController?.addCSVFile(data: csvString, studentName: currentStudent.name ?? "")
+            navigationController?.popToRootViewController(animated: true)
         }
     }
     

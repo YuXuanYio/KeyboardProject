@@ -172,14 +172,6 @@
                                     <action selector="clearButton:" destination="MaR-y0-BfL" eventType="touchUpInside" id="7Ws-wh-VkM"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1RG-zZ-8bc">
-                                <rect key="frame" x="628" y="600" width="152" height="35"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Read My Answer"/>
-                                <connections>
-                                    <action selector="readAnswerButton:" destination="MaR-y0-BfL" eventType="touchUpInside" id="TKO-8V-fNP"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xDB-sL-3LQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -191,12 +183,10 @@
                             <constraint firstItem="BoS-kG-MPt" firstAttribute="leading" secondItem="xDB-sL-3LQ" secondAttribute="leading" id="Afm-Or-sdA"/>
                             <constraint firstItem="IRa-eq-gat" firstAttribute="centerX" secondItem="xDB-sL-3LQ" secondAttribute="centerX" id="F2d-Yl-X98"/>
                             <constraint firstItem="eDP-Bu-okb" firstAttribute="centerX" secondItem="xDB-sL-3LQ" secondAttribute="centerX" id="GD7-nq-SnA"/>
-                            <constraint firstItem="BoS-kG-MPt" firstAttribute="top" secondItem="1RG-zZ-8bc" secondAttribute="bottom" constant="20" id="HEO-uC-Ty4"/>
                             <constraint firstItem="eDP-Bu-okb" firstAttribute="top" secondItem="FsI-xU-kni" secondAttribute="bottom" constant="30" id="IXD-Dd-mYG"/>
                             <constraint firstItem="IRa-eq-gat" firstAttribute="centerY" secondItem="xDB-sL-3LQ" secondAttribute="centerY" id="WqA-Xu-e00"/>
                             <constraint firstItem="BoS-kG-MPt" firstAttribute="top" secondItem="UmK-Lb-6e6" secondAttribute="bottom" constant="20" id="Z7W-RO-5BM"/>
                             <constraint firstItem="BoS-kG-MPt" firstAttribute="top" secondItem="IRa-eq-gat" secondAttribute="bottom" constant="20" id="nVD-dq-a5c"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="1RG-zZ-8bc" secondAttribute="trailing" constant="20" id="yjV-zX-bVH"/>
                             <constraint firstItem="UmK-Lb-6e6" firstAttribute="leading" secondItem="xDB-sL-3LQ" secondAttribute="leading" constant="20" id="zRd-zb-bbz"/>
                         </constraints>
                     </view>
@@ -285,19 +275,10 @@
                                     <action selector="clearCanvas:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TTD-bl-4Zx"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w7u-YX-tam">
-                                <rect key="frame" x="648" y="620.5" width="152" height="34.5"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Read My Answer"/>
-                                <connections>
-                                    <action selector="readDigit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qVN-tC-5jP"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="wjg-E9-MPo" firstAttribute="top" secondItem="w7u-YX-tam" secondAttribute="bottom" constant="5" id="1fo-lz-LPr"/>
                             <constraint firstItem="iQ5-8u-qGK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="7G7-vy-qfY"/>
                             <constraint firstItem="iQ5-8u-qGK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="BGI-7z-024"/>
                             <constraint firstItem="98w-oF-8Rx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Bbn-ru-7Ak"/>
@@ -311,7 +292,6 @@
                             <constraint firstItem="1cU-H8-ku9" firstAttribute="top" secondItem="98w-oF-8Rx" secondAttribute="bottom" constant="20" id="p1r-eS-9Ws"/>
                             <constraint firstItem="wjg-E9-MPo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="q4W-Na-V9k"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1cU-H8-ku9" secondAttribute="trailing" constant="20" id="t0z-kY-1LU"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="w7u-YX-tam" secondAttribute="trailing" constant="20" id="wiS-cq-qMg"/>
                             <constraint firstItem="GJl-eK-Zie" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="xHU-P3-Vbw"/>
                             <constraint firstItem="wjg-E9-MPo" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="xb9-8l-CWr"/>
                         </constraints>
