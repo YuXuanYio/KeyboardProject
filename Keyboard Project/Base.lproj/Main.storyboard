@@ -165,11 +165,37 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UmK-Lb-6e6">
-                                <rect key="frame" x="20" y="600" width="64" height="35"/>
+                                <rect key="frame" x="20" y="595" width="210" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="210" id="3Ym-U5-zhD"/>
+                                    <constraint firstAttribute="height" constant="40" id="edW-4D-rIQ"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Clear"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Clear"/>
                                 <connections>
                                     <action selector="clearButton:" destination="MaR-y0-BfL" eventType="touchUpInside" id="7Ws-wh-VkM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vGD-R9-7zT">
+                                <rect key="frame" x="590" y="595" width="210" height="40"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="210" id="Me3-Ga-qaY"/>
+                                    <constraint firstAttribute="height" constant="40" id="pZT-mV-Rsy"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Record A Comment"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6dS-FN-OW7">
+                                <rect key="frame" x="590" y="535" width="210" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="L19-bJ-aow"/>
+                                    <constraint firstAttribute="width" constant="210" id="hej-qn-UhP"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Ready for Next Question"/>
+                                <connections>
+                                    <action selector="readyForNextQuestionPressed:" destination="MaR-y0-BfL" eventType="touchUpInside" id="gsk-Qj-eLf"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -178,6 +204,7 @@
                         <constraints>
                             <constraint firstItem="FsI-xU-kni" firstAttribute="centerX" secondItem="xDB-sL-3LQ" secondAttribute="centerX" id="079-Dy-dsf"/>
                             <constraint firstItem="xDB-sL-3LQ" firstAttribute="trailing" secondItem="BoS-kG-MPt" secondAttribute="trailing" id="6DZ-sg-ol1"/>
+                            <constraint firstItem="xDB-sL-3LQ" firstAttribute="trailing" secondItem="vGD-R9-7zT" secondAttribute="trailing" constant="20" id="6au-MB-yzw"/>
                             <constraint firstItem="xDB-sL-3LQ" firstAttribute="bottom" secondItem="BoS-kG-MPt" secondAttribute="bottom" id="8O5-1n-17S"/>
                             <constraint firstItem="FsI-xU-kni" firstAttribute="top" secondItem="xDB-sL-3LQ" secondAttribute="top" constant="30" id="8vB-dM-EEu"/>
                             <constraint firstItem="BoS-kG-MPt" firstAttribute="leading" secondItem="xDB-sL-3LQ" secondAttribute="leading" id="Afm-Or-sdA"/>
@@ -186,14 +213,19 @@
                             <constraint firstItem="eDP-Bu-okb" firstAttribute="top" secondItem="FsI-xU-kni" secondAttribute="bottom" constant="30" id="IXD-Dd-mYG"/>
                             <constraint firstItem="IRa-eq-gat" firstAttribute="centerY" secondItem="xDB-sL-3LQ" secondAttribute="centerY" id="WqA-Xu-e00"/>
                             <constraint firstItem="BoS-kG-MPt" firstAttribute="top" secondItem="UmK-Lb-6e6" secondAttribute="bottom" constant="20" id="Z7W-RO-5BM"/>
+                            <constraint firstItem="xDB-sL-3LQ" firstAttribute="trailing" secondItem="6dS-FN-OW7" secondAttribute="trailing" constant="20" id="bLi-gn-9oa"/>
+                            <constraint firstItem="vGD-R9-7zT" firstAttribute="top" secondItem="6dS-FN-OW7" secondAttribute="bottom" constant="20" id="dwN-Ru-Yii"/>
                             <constraint firstItem="BoS-kG-MPt" firstAttribute="top" secondItem="IRa-eq-gat" secondAttribute="bottom" constant="20" id="nVD-dq-a5c"/>
+                            <constraint firstItem="BoS-kG-MPt" firstAttribute="top" secondItem="vGD-R9-7zT" secondAttribute="bottom" constant="20" id="t78-nO-vma"/>
                             <constraint firstItem="UmK-Lb-6e6" firstAttribute="leading" secondItem="xDB-sL-3LQ" secondAttribute="leading" constant="20" id="zRd-zb-bbz"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="MQk-eZ-BPy"/>
                     <connections>
+                        <outlet property="commentButton" destination="vGD-R9-7zT" id="2E5-0Z-boQ"/>
                         <outlet property="questionLabel" destination="eDP-Bu-okb" id="Amo-ow-vFw"/>
                         <outlet property="questionNumberLabel" destination="FsI-xU-kni" id="GpC-gZ-f1w"/>
+                        <outlet property="readyForNextQuestionButton" destination="6dS-FN-OW7" id="l6D-qk-DDW"/>
                         <outlet property="responseLabel" destination="IRa-eq-gat" id="7H6-Dz-RA0"/>
                         <outlet property="textField" destination="BoS-kG-MPt" id="sti-EE-wzb"/>
                     </connections>

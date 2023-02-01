@@ -34,7 +34,6 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
     let request = SFSpeechAudioBufferRecognitionRequest()
     var task: SFSpeechRecognitionTask!
     var isStarted: Bool = false
-
         
     @IBOutlet weak var responseLabel: UILabel!
     @IBOutlet weak var questionNumberLabel: UILabel!
@@ -47,6 +46,14 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         try! csv.write(field: textField.text ?? "")
         textField.text = ""
     }
+    
+    @IBOutlet weak var commentButton: UIButton!
+    @IBOutlet weak var readyForNextQuestionButton: UIButton!
+    
+    @IBAction func readyForNextQuestionPressed(_ sender: Any) {
+        readyForNextProblem()
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +69,25 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         beginNewCSVRow()
         try! csv.write(field: selectedQuestionList[0].question ?? "")
         requestPermissionForMic()
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressAction))
+        longPressGesture.cancelsTouchesInView = false
+        commentButton.addGestureRecognizer(longPressGesture)
+        hideNextQuestionButtons()
+    }
+    
+    @objc func longPressAction(gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            self.recordComment()
+            print("Test")
+            _ = Timer.scheduledTimer(withTimeInterval: 10, repeats: false) {
+                timer in
+                gesture.state = .ended
+            }
+        }
+        if gesture.state == .ended {
+            print("Ended")
+            recordComment()
+        }
     }
     
     func beginNewCSVRow() {
@@ -77,7 +103,8 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let allowedCharacters = CharacterSet.decimalDigits
         let characterSet = CharacterSet(charactersIn: string)
-        addNextquestionButtons()
+        unhideNextQuestionButtons()
+        commentButton.isHidden = false
         return allowedCharacters.isSuperset(of: characterSet)
     }
     
@@ -108,18 +135,17 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         reactionTime = String(format: "%.2f", elaspedTime)
     }
     
-    func removeNextQuestionButtons() {
-        self.navigationItem.rightBarButtonItems = .none
-
+    func hideNextQuestionButtons() {
+        commentButton.isHidden = true
+        readyForNextQuestionButton.isHidden = true
     }
     
-    func addNextquestionButtons() {
-        let nextProblemButton = UIBarButtonItem(title: "Ready for next problem", style: .plain, target: self, action: #selector(self.readyForNextProblem))
-        let commentButton = UIBarButtonItem(title: "Record a comment", style: .plain, target: self, action: #selector(self.recordComment))
-        self.navigationItem.rightBarButtonItems = [nextProblemButton, commentButton]
+    func unhideNextQuestionButtons() {
+        commentButton.isHidden = false
+        readyForNextQuestionButton.isHidden = false
     }
     
-    @objc func readyForNextProblem() {
+    func readyForNextProblem() {
         var answerCorrect = "0"
         if textField.text == String(self.currentQuestion.answer ?? 0) {
             answerCorrect = "1"
@@ -134,7 +160,7 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
             try! csv.write(field: answerCorrect)
             try! csv.write(field: String(reactionTime))
         }
-        self.removeNextQuestionButtons()
+        self.hideNextQuestionButtons()
         print(finalQuestionComments)
         if commentsRecorded == false {
             try! csv.write(field: "-")
@@ -143,6 +169,9 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         }
         if self.counter < self.selectedQuestionList.count {
             self.counter += 1
+            if self.counter == self.selectedQuestionList.count {
+                readyForNextQuestionButton.setTitle("Exit to Home Page", for: .normal)
+            }
             clearButtonPressed = false
             commentsRecorded = false
             currentQuestion = self.selectedQuestionList[self.counter - 1]
@@ -167,16 +196,13 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         }
     }
     
-    @objc func recordComment() {
+    func recordComment() {
         commentsRecorded = true
         isStarted = !isStarted
         if isStarted {
-            let nextProblemButton = UIBarButtonItem(title: "Ready for next problem", style: .plain, target: self, action: #selector(self.readyForNextProblem))
-            let commentButton = UIBarButtonItem(title: "Stop Recording", style: .plain, target: self, action: #selector(self.recordComment))
-            self.navigationItem.rightBarButtonItems = [nextProblemButton, commentButton]
             startSpeechRecognition()
         } else {
-            addNextquestionButtons()
+            unhideNextQuestionButtons()
             cancelSpeechRecognition()
         }
     }
