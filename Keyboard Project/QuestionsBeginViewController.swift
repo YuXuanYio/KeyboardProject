@@ -71,6 +71,13 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         longPressGesture.cancelsTouchesInView = false
         commentButton.addGestureRecognizer(longPressGesture)
         hideNextQuestionButtons()
+        textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        if let _ = Int(textField.text ?? "") {
+            unhideNextQuestionButtons()
+        }
     }
     
     @objc func longPressAction(gesture: UILongPressGestureRecognizer) {
@@ -99,13 +106,11 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         try! csv.write(field: today)
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let allowedCharacters = CharacterSet.decimalDigits
-        let characterSet = CharacterSet(charactersIn: string)
-        unhideNextQuestionButtons()
-        commentButton.isHidden = false
-        return allowedCharacters.isSuperset(of: characterSet)
-    }
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        let allowedCharacters = CharacterSet.decimalDigits
+//        let characterSet = CharacterSet(charactersIn: string)
+//        return allowedCharacters.isSuperset(of: characterSet)
+//    }
     
     func initTextField() {
         textField.delegate = self
@@ -145,53 +150,57 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
     }
     
     func readyForNextProblem() {
-        var answerCorrect = "0"
-        if textField.text == String(self.currentQuestion.answer ?? 0) {
-            answerCorrect = "1"
-        }
-        if clearButtonPressed == false {
-            try! csv.write(field: textField.text ?? "")
-            try! csv.write(field: "-")
-            try! csv.write(field: answerCorrect)
-            try! csv.write(field: String(reactionTime))
-        } else {
-            try! csv.write(field: textField.text ?? "")
-            try! csv.write(field: answerCorrect)
-            try! csv.write(field: String(reactionTime))
-        }
-        self.hideNextQuestionButtons()
-        print(finalQuestionComments)
-        if commentsRecorded == false {
-            try! csv.write(field: "-")
-        } else {
-            try! csv.write(field: finalQuestionComments)
-        }
-        if self.counter < self.selectedQuestionList.count {
-            self.counter += 1
-            if self.counter == self.selectedQuestionList.count {
-                readyForNextQuestionButton.setTitle("Exit to Home Page", for: .normal)
+        if let _ = Int(textField.text ?? "") {
+            var answerCorrect = "0"
+            if textField.text == String(self.currentQuestion.answer ?? 0) {
+                answerCorrect = "1"
             }
-            clearButtonPressed = false
-            commentsRecorded = false
-            currentQuestion = self.selectedQuestionList[self.counter - 1]
-            self.questionLabel.text = self.selectedQuestionList[self.counter - 1].question
-            // Writing question name to csv file.
-            beginNewCSVRow()
-            try! csv.write(field: self.selectedQuestionList[self.counter - 1].question ?? "")
-            self.questionNumberLabel.text = "Question " + String(self.counter) + ":"
-            self.textField.text = ""
-            self.textField.resignFirstResponder()
-            self.startTimer()
-        } else {
-            // End the question set here. Depending on whether display answer or not.
-            csv.stream.close()
+            if clearButtonPressed == false {
+                try! csv.write(field: textField.text ?? "")
+                try! csv.write(field: "-")
+                try! csv.write(field: answerCorrect)
+                try! csv.write(field: String(reactionTime))
+            } else {
+                try! csv.write(field: textField.text ?? "")
+                try! csv.write(field: answerCorrect)
+                try! csv.write(field: String(reactionTime))
+            }
+            self.hideNextQuestionButtons()
+            print(finalQuestionComments)
+            if commentsRecorded == false {
+                try! csv.write(field: "-")
+            } else {
+                try! csv.write(field: finalQuestionComments)
+            }
+            if self.counter < self.selectedQuestionList.count {
+                self.counter += 1
+                if self.counter == self.selectedQuestionList.count {
+                    readyForNextQuestionButton.setTitle("Exit to Home Page", for: .normal)
+                }
+                clearButtonPressed = false
+                commentsRecorded = false
+                currentQuestion = self.selectedQuestionList[self.counter - 1]
+                self.questionLabel.text = self.selectedQuestionList[self.counter - 1].question
+                // Writing question name to csv file.
+                beginNewCSVRow()
+                try! csv.write(field: self.selectedQuestionList[self.counter - 1].question ?? "")
+                self.questionNumberLabel.text = "Question " + String(self.counter) + ":"
+                self.textField.text = ""
+                self.textField.resignFirstResponder()
+                self.startTimer()
+            } else {
+                // End the question set here. Depending on whether display answer or not.
+                csv.stream.close()
 
-            // Get the data from the CSV file as a string
-            let csvData = csv.stream.property(forKey: .dataWrittenToMemoryStreamKey) as! Data
-            let csvString = String(data: csvData, encoding: .utf8)!
-            print(csvString)
-            databaseController?.addCSVFile(data: csvString, studentName: currentStudent.name ?? "")
-            navigationController?.popToRootViewController(animated: true)
+                // Get the data from the CSV file as a string
+                let csvData = csv.stream.property(forKey: .dataWrittenToMemoryStreamKey) as! Data
+                let csvString = String(data: csvData, encoding: .utf8)!
+                print(csvString)
+                databaseController?.addCSVFile(data: csvString, studentName: currentStudent.name ?? "")
+                navigationController?.popToRootViewController(animated: true)
+            }
+        } else {
+            displayMessage(title: "Error", message: "Please enter numerical answers only. Clear space provided and try again.")
         }
     }
     
