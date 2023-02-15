@@ -85,6 +85,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
     func parseQuestionSetSnapshot(snapshot: QueryDocumentSnapshot) {
         let tempQuestionSet = QuestionSet()
         tempQuestionSet.name = snapshot.data()["name"] as? String
+        tempQuestionSet.randomized = snapshot.data()["randomized"] as? Bool
         tempQuestionSet.id = snapshot.documentID
         if let questionsReferences = snapshot.data()["questions"] as? [DocumentReference] {
             print(questionList)

@@ -66,13 +66,16 @@ class QuestionSetTableViewController: UITableViewController, DatabaseListener {
     }
 
     // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "selectedSetSegue" {
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 let destination = segue.destination as! StudentDetailsViewController
-                destination.selectedQuestionList = currentQuestionSets[selectedIndexPath.row].questions
+                if currentQuestionSets[selectedIndexPath.row].randomized == false {
+                    destination.selectedQuestionList = currentQuestionSets[selectedIndexPath.row].questions
+                } else {
+                    destination.selectedQuestionList = currentQuestionSets[selectedIndexPath.row].questions.shuffled()
+                }
             }
         }
     }

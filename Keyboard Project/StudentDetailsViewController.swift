@@ -23,8 +23,6 @@ class StudentDetailsViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        print(answersShown)
-        print(selectedQuestionList)
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         databaseController = appDelegate?.databaseController
         // Back button should be hidden before deployment at this stage students should not be able to view the questions

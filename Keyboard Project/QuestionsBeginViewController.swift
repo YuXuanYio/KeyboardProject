@@ -35,7 +35,6 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
     var task: SFSpeechRecognitionTask!
     var isStarted: Bool = false
         
-    @IBOutlet weak var responseLabel: UILabel!
     @IBOutlet weak var questionNumberLabel: UILabel!
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
@@ -61,7 +60,6 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         currentQuestion = selectedQuestionList[0]
         questionLabel.text = selectedQuestionList[0].question
         questionNumberLabel.text = "Question " + String(counter) + ":"
-        responseLabel.text = "Your response: "
         initTextField()
         startTimer()
         self.navigationItem.hidesBackButton = true
@@ -86,6 +84,7 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         }
         if gesture.state == .ended {
             print("Ended")
+            //TODO: TEST and check the bug and fix
             recordComment()
         }
     }
