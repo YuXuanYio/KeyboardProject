@@ -198,6 +198,13 @@
                                     <action selector="readyForNextQuestionPressed:" destination="MaR-y0-BfL" eventType="touchUpInside" id="gsk-Qj-eLf"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="U5e-rw-2CP">
+                                <rect key="frame" x="20" y="256" width="780" height="321"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xDB-sL-3LQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -206,6 +213,7 @@
                             <constraint firstItem="vGD-R9-7zT" firstAttribute="centerX" secondItem="xDB-sL-3LQ" secondAttribute="centerX" id="1mg-zB-mL9"/>
                             <constraint firstItem="xDB-sL-3LQ" firstAttribute="trailing" secondItem="BoS-kG-MPt" secondAttribute="trailing" id="6DZ-sg-ol1"/>
                             <constraint firstItem="UmK-Lb-6e6" firstAttribute="bottom" secondItem="vGD-R9-7zT" secondAttribute="bottom" id="7J9-GV-7JJ"/>
+                            <constraint firstItem="xDB-sL-3LQ" firstAttribute="trailing" secondItem="U5e-rw-2CP" secondAttribute="trailing" constant="20" id="81y-ky-S1b"/>
                             <constraint firstItem="xDB-sL-3LQ" firstAttribute="bottom" secondItem="BoS-kG-MPt" secondAttribute="bottom" id="8O5-1n-17S"/>
                             <constraint firstItem="FsI-xU-kni" firstAttribute="top" secondItem="xDB-sL-3LQ" secondAttribute="top" constant="30" id="8vB-dM-EEu"/>
                             <constraint firstItem="vGD-R9-7zT" firstAttribute="centerY" secondItem="xDB-sL-3LQ" secondAttribute="centerY" id="9kn-Gp-eUY"/>
@@ -214,19 +222,23 @@
                             <constraint firstItem="BoS-kG-MPt" firstAttribute="top" secondItem="vGD-R9-7zT" secondAttribute="bottom" constant="20" id="E3u-Tr-wRa"/>
                             <constraint firstItem="eDP-Bu-okb" firstAttribute="centerX" secondItem="xDB-sL-3LQ" secondAttribute="centerX" id="GD7-nq-SnA"/>
                             <constraint firstItem="6dS-FN-OW7" firstAttribute="bottom" secondItem="vGD-R9-7zT" secondAttribute="bottom" id="Hjs-7n-Yqi"/>
+                            <constraint firstItem="U5e-rw-2CP" firstAttribute="top" secondItem="eDP-Bu-okb" secondAttribute="bottom" constant="20" id="Hx2-s0-Ycz"/>
                             <constraint firstItem="eDP-Bu-okb" firstAttribute="top" secondItem="FsI-xU-kni" secondAttribute="bottom" constant="30" id="IXD-Dd-mYG"/>
+                            <constraint firstItem="vGD-R9-7zT" firstAttribute="top" secondItem="U5e-rw-2CP" secondAttribute="bottom" constant="20" id="Izv-ep-ej4"/>
                             <constraint firstItem="UmK-Lb-6e6" firstAttribute="leading" secondItem="xDB-sL-3LQ" secondAttribute="leading" constant="20" id="Se5-ZP-oTi"/>
                             <constraint firstItem="UmK-Lb-6e6" firstAttribute="top" secondItem="vGD-R9-7zT" secondAttribute="top" id="ave-f6-PvS"/>
                             <constraint firstItem="xDB-sL-3LQ" firstAttribute="trailing" secondItem="PIb-lX-kCF" secondAttribute="trailing" constant="20" id="ceb-Pl-dV7"/>
                             <constraint firstItem="xDB-sL-3LQ" firstAttribute="bottom" secondItem="PIb-lX-kCF" secondAttribute="bottom" constant="20" id="dR2-6F-VBG"/>
                             <constraint firstItem="6dS-FN-OW7" firstAttribute="top" secondItem="vGD-R9-7zT" secondAttribute="top" id="eRx-Qn-R8x"/>
                             <constraint firstItem="6dS-FN-OW7" firstAttribute="centerY" secondItem="xDB-sL-3LQ" secondAttribute="centerY" id="oHT-mL-Q3G"/>
+                            <constraint firstItem="U5e-rw-2CP" firstAttribute="leading" secondItem="xDB-sL-3LQ" secondAttribute="leading" constant="20" id="ogy-uT-DFb"/>
                             <constraint firstItem="xDB-sL-3LQ" firstAttribute="trailing" secondItem="6dS-FN-OW7" secondAttribute="trailing" constant="20" id="v66-pW-WEg"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="MQk-eZ-BPy"/>
                     <connections>
                         <outlet property="commentButton" destination="vGD-R9-7zT" id="2E5-0Z-boQ"/>
+                        <outlet property="commentTextView" destination="U5e-rw-2CP" id="PxH-UG-ZR4"/>
                         <outlet property="questionLabel" destination="eDP-Bu-okb" id="Amo-ow-vFw"/>
                         <outlet property="questionNumberLabel" destination="FsI-xU-kni" id="GpC-gZ-f1w"/>
                         <outlet property="readyForNextQuestionButton" destination="6dS-FN-OW7" id="l6D-qk-DDW"/>

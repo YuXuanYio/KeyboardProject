@@ -33,12 +33,14 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
     let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer()
     let request = SFSpeechAudioBufferRecognitionRequest()
     var task: SFSpeechRecognitionTask!
-    var isStarted: Bool = false
-        
+    var commentTimer: Timer?
+    
     @IBOutlet weak var questionNumberLabel: UILabel!
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
-    
+    @IBOutlet weak var commentButton: UIButton!
+    @IBOutlet weak var readyForNextQuestionButton: UIButton!
+    @IBOutlet weak var commentTextView: UITextView!
     
     @IBAction func clearButton(_ sender: Any) {
         clearButtonPressed = true
@@ -46,13 +48,9 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         textField.text = ""
     }
     
-    @IBOutlet weak var commentButton: UIButton!
-    @IBOutlet weak var readyForNextQuestionButton: UIButton!
-    
     @IBAction func readyForNextQuestionPressed(_ sender: Any) {
         readyForNextProblem()
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +70,7 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         commentButton.addGestureRecognizer(longPressGesture)
         hideNextQuestionButtons()
         textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        commentTextView.isHidden = true
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -82,9 +81,10 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
     
     @objc func longPressAction(gesture: UILongPressGestureRecognizer) {
         if gesture.state == .began {
+            commentTextView.isHidden = false
             self.recordComment()
-            print("Test")
-            _ = Timer.scheduledTimer(withTimeInterval: 10, repeats: false) {
+            // problem here, gesture fucked
+            commentTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false) {
                 timer in
                 gesture.state = .ended
             }
@@ -92,7 +92,11 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         if gesture.state == .ended {
             print("Ended")
             //TODO: TEST and check the bug and fix
-            recordComment()
+            cancelSpeechRecognition()
+            commentButton.isEnabled = false
+            if commentTimer?.isValid ?? true {
+                commentTimer?.invalidate()
+            }
         }
     }
     
@@ -140,6 +144,7 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
     }
     
     func hideNextQuestionButtons() {
+        commentButton.isEnabled = true
         commentButton.isHidden = true
         readyForNextQuestionButton.isHidden = true
     }
@@ -206,13 +211,7 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
     
     func recordComment() {
         commentsRecorded = true
-        isStarted = !isStarted
-        if isStarted {
-            startSpeechRecognition()
-        } else {
-            unhideNextQuestionButtons()
-            cancelSpeechRecognition()
-        }
+        startSpeechRecognition()
     }
     
     func startSpeechRecognition() {
@@ -247,6 +246,7 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
             }
             let message = response.bestTranscription.formattedString
             self.tempQuestionComments = message
+            self.commentTextView.text = "Your recorded comment: " + message
         })
     }
     
@@ -258,6 +258,7 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         audioEngine.stop()
         audioEngine.inputNode.removeTap(onBus: 0)
         finalQuestionComments = tempQuestionComments
+        commentTextView.isHidden = true
     }
     
     func requestPermissionForMic() {
