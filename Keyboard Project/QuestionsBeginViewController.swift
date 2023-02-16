@@ -210,6 +210,7 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
     }
     
     func recordComment() {
+        commentTextView.text = "Start speaking to record a comment"
         commentsRecorded = true
         startSpeechRecognition()
     }
