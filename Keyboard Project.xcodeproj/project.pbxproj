@@ -29,6 +29,7 @@
 		D89093AD2952BEE700FC8EEA /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89093AC2952BEE700FC8EEA /* CanvasView.swift */; };
 		D89093B129534A7F00FC8EEA /* MNIST.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D89093B029534A7E00FC8EEA /* MNIST.mlmodel */; };
 		D89093B329534C9600FC8EEA /* mnistCNN.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D89093B229534C9600FC8EEA /* mnistCNN.mlmodel */; };
+		D8DBCC0729A730130095C063 /* RecordCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DBCC0629A730130095C063 /* RecordCommentViewController.swift */; };
 		D8EE521729628A6900F84CEA /* StudentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EE521629628A6900F84CEA /* StudentDetailsViewController.swift */; };
 		D8EE52192963E4A400F84CEA /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EE52182963E4A400F84CEA /* Student.swift */; };
 		D8EE521B29642DCC00F84CEA /* QuestionsBeginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EE521A29642DCC00F84CEA /* QuestionsBeginViewController.swift */; };
@@ -55,6 +56,7 @@
 		D89093AC2952BEE700FC8EEA /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		D89093B029534A7E00FC8EEA /* MNIST.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MNIST.mlmodel; sourceTree = "<group>"; };
 		D89093B229534C9600FC8EEA /* mnistCNN.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = mnistCNN.mlmodel; sourceTree = "<group>"; };
+		D8DBCC0629A730130095C063 /* RecordCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCommentViewController.swift; sourceTree = "<group>"; };
 		D8EE521629628A6900F84CEA /* StudentDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDetailsViewController.swift; sourceTree = "<group>"; };
 		D8EE52182963E4A400F84CEA /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		D8EE521A29642DCC00F84CEA /* QuestionsBeginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsBeginViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				D89093982952906800FC8EEA /* SceneDelegate.swift */,
 				D890939A2952906800FC8EEA /* QnAViewController.swift */,
 				D890939C2952906800FC8EEA /* Main.storyboard */,
+				D8DBCC0629A730130095C063 /* RecordCommentViewController.swift */,
 				D890939F2952906D00FC8EEA /* Assets.xcassets */,
 				D89093A12952906D00FC8EEA /* LaunchScreen.storyboard */,
 				D89093A42952906D00FC8EEA /* Info.plist */,
@@ -239,6 +242,7 @@
 				D83167412958885000CD658E /* DatabaseProtocol.swift in Sources */,
 				D8EE521B29642DCC00F84CEA /* QuestionsBeginViewController.swift in Sources */,
 				D8907195296696B600181380 /* QuestionSetTableViewController.swift in Sources */,
+				D8DBCC0729A730130095C063 /* RecordCommentViewController.swift in Sources */,
 				D867930029668D3F00FD3C36 /* QuestionSet.swift in Sources */,
 				D89093992952906800FC8EEA /* SceneDelegate.swift in Sources */,
 				D831673D2958881700CD658E /* FirebaseController.swift in Sources */,

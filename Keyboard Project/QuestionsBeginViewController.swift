@@ -9,7 +9,7 @@ import UIKit
 import CSV
 import Speech
 
-class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, DatabaseListener, SFSpeechRecognizerDelegate {
+class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, DatabaseListener, SFSpeechRecognizerDelegate, RecordCommentViewControllerDelegate {
     
     var listenerType: ListenerType = .child
     var selectedQuestionList: [Question] = []
@@ -41,6 +41,7 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var readyForNextQuestionButton: UIButton!
     @IBOutlet weak var commentTextView: UITextView!
+    @IBOutlet weak var tapAndHoldLabel: UILabel!
     
     @IBAction func clearButton(_ sender: Any) {
         clearButtonPressed = true
@@ -73,6 +74,10 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         commentTextView.isHidden = true
     }
     
+    func didGetTargetData(data: String) {
+        print(data)
+    }
+    
     @objc func textFieldDidChange(_ textField: UITextField) {
         if let _ = Int(textField.text ?? "") {
             unhideNextQuestionButtons()
@@ -91,7 +96,6 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         }
         if gesture.state == .ended {
             print("Ended")
-            //TODO: TEST and check the bug and fix
             cancelSpeechRecognition()
             commentButton.isEnabled = false
             if commentTimer?.isValid ?? true {
@@ -147,11 +151,13 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         commentButton.isEnabled = true
         commentButton.isHidden = true
         readyForNextQuestionButton.isHidden = true
+        tapAndHoldLabel.isHidden = true
     }
     
     func unhideNextQuestionButtons() {
         commentButton.isHidden = false
         readyForNextQuestionButton.isHidden = false
+        tapAndHoldLabel.isHidden = false
     }
     
     func readyForNextProblem() {
@@ -279,15 +285,18 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         }
     }
     
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "recordComment" {
+            if let recordCommentVC = segue.destination as? RecordCommentViewController {
+                recordCommentVC.commentDelegate = self
+            }
+        }
     }
-    */
     
     func displayMessage(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
