@@ -27,21 +27,13 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
     var reactionTime = ""
     var commentsRecorded = false
     var currentQuestion = Question()
-    var tempQuestionComments = ""
     var finalQuestionComments = ""
-    let audioEngine = AVAudioEngine()
-    let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer()
-    let request = SFSpeechAudioBufferRecognitionRequest()
-    var task: SFSpeechRecognitionTask!
-    var commentTimer: Timer?
     
     @IBOutlet weak var questionNumberLabel: UILabel!
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var readyForNextQuestionButton: UIButton!
-    @IBOutlet weak var commentTextView: UITextView!
-    @IBOutlet weak var tapAndHoldLabel: UILabel!
     
     @IBAction func clearButton(_ sender: Any) {
         clearButtonPressed = true
@@ -66,41 +58,18 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         beginNewCSVRow()
         try! csv.write(field: selectedQuestionList[0].question ?? "")
         requestPermissionForMic()
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressAction))
-        longPressGesture.cancelsTouchesInView = false
-        commentButton.addGestureRecognizer(longPressGesture)
         hideNextQuestionButtons()
         textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        commentTextView.isHidden = true
     }
     
     func didGetTargetData(data: String) {
-        print(data)
+        commentsRecorded = true
+        finalQuestionComments = data
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         if let _ = Int(textField.text ?? "") {
             unhideNextQuestionButtons()
-        }
-    }
-    
-    @objc func longPressAction(gesture: UILongPressGestureRecognizer) {
-        if gesture.state == .began {
-            commentTextView.isHidden = false
-            self.recordComment()
-            // problem here, gesture fucked
-            commentTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false) {
-                timer in
-                gesture.state = .ended
-            }
-        }
-        if gesture.state == .ended {
-            print("Ended")
-            cancelSpeechRecognition()
-            commentButton.isEnabled = false
-            if commentTimer?.isValid ?? true {
-                commentTimer?.invalidate()
-            }
         }
     }
     
@@ -151,13 +120,11 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         commentButton.isEnabled = true
         commentButton.isHidden = true
         readyForNextQuestionButton.isHidden = true
-        tapAndHoldLabel.isHidden = true
     }
     
     func unhideNextQuestionButtons() {
         commentButton.isHidden = false
         readyForNextQuestionButton.isHidden = false
-        tapAndHoldLabel.isHidden = false
     }
     
     func readyForNextProblem() {
@@ -213,59 +180,6 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         } else {
             displayMessage(title: "Error", message: "Please enter numerical answers only. Clear space provided and try again.")
         }
-    }
-    
-    func recordComment() {
-        commentTextView.text = "Start speaking to record a comment"
-        commentsRecorded = true
-        startSpeechRecognition()
-    }
-    
-    func startSpeechRecognition() {
-        let node = audioEngine.inputNode
-        let recordingFormat = node.outputFormat(forBus: 0)
-        node.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) {
-            (buffer, _) in
-            self.request.append(buffer)
-        }
-        audioEngine.prepare()
-        do {
-            try audioEngine.start()
-        } catch {
-            displayMessage(title: "Error", message: "")
-        }
-        guard let myRecognition = SFSpeechRecognizer() else {
-            self.displayMessage(title: "Error", message: "Speech recognition is not available on your device")
-            return
-        }
-        if !myRecognition.isAvailable {
-            self.displayMessage(title: "Error", message: "Recognition is not available right now")
-        }
-        task = speechRecognizer?.recognitionTask(with: request, resultHandler: {
-            (response, error) in
-            guard let response = response else {
-                if error != nil {
-                    print(error.debugDescription)
-                } else {
-                    print("Unable to provide a response")
-                }
-                return
-            }
-            let message = response.bestTranscription.formattedString
-            self.tempQuestionComments = message
-            self.commentTextView.text = "Your recorded comment: " + message
-        })
-    }
-    
-    func cancelSpeechRecognition() {
-        task.finish()
-        task.cancel()
-        task = nil
-        request.endAudio()
-        audioEngine.stop()
-        audioEngine.inputNode.removeTap(onBus: 0)
-        finalQuestionComments = tempQuestionComments
-        commentTextView.isHidden = true
     }
     
     func requestPermissionForMic() {

@@ -88,7 +88,6 @@ class FirebaseController: NSObject, DatabaseProtocol {
         tempQuestionSet.randomized = snapshot.data()["randomized"] as? Bool
         tempQuestionSet.id = snapshot.documentID
         if let questionsReferences = snapshot.data()["questions"] as? [DocumentReference] {
-            print(questionList)
             for reference in questionsReferences {
                 if let question = getQuestionByID(id: reference.documentID) {
                     tempQuestionSet.questions.append(question)

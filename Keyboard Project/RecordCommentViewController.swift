@@ -48,7 +48,6 @@ class RecordCommentViewController: UIViewController, SFSpeechRecognizerDelegate 
             }
         }
         if gesture.state == .ended {
-            print("Ended")
             cancelSpeechRecognition()
             recordButton.isEnabled = false
             if commentTimer?.isValid ?? true {
@@ -99,7 +98,7 @@ class RecordCommentViewController: UIViewController, SFSpeechRecognizerDelegate 
             }
             let message = response.bestTranscription.formattedString
             self.tempQuestionComments = message
-            self.commentTextView.text = "Your recorded comment: " + message
+            self.commentTextView.text = "Your recorded comment: " + self.tempQuestionComments
         })
     }
     
@@ -111,6 +110,7 @@ class RecordCommentViewController: UIViewController, SFSpeechRecognizerDelegate 
         audioEngine.stop()
         audioEngine.inputNode.removeTap(onBus: 0)
         finalQuestionComments = tempQuestionComments
+        commentTextView.text = "Your recorded comment: " + finalQuestionComments
     }
     
     func requestPermissionForMic() {
