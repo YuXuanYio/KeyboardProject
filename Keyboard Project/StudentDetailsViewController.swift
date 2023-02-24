@@ -76,6 +76,10 @@ class StudentDetailsViewController: UIViewController {
             displayMessage(title: "Not all fields filled", message: errorMsg)
             return
         }
+        if !isNumeric(text: yearLevel) {
+            displayMessage(title: "Error", message: "Only numerical numbers for Year Level")
+            return
+        }
         var gender = ""
         if genderInt == 0 {
             gender = "Female"
@@ -85,6 +89,11 @@ class StudentDetailsViewController: UIViewController {
             gender = "Others"
         }
         currentStudent = databaseController!.addChild(name: name, gender: gender, yearLevel: Int(yearLevel) ?? 0, date: Date())
+    }
+    
+    func isNumeric(text: String) -> Bool {
+        let regex = try! NSRegularExpression(pattern: "^[0-9]*$")
+        return regex.firstMatch(in: text, options: [], range: NSRange(location: 0, length: text.utf16.count)) != nil
     }
 
     // MARK: - Navigation
