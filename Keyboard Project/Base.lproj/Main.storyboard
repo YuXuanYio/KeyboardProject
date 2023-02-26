@@ -183,7 +183,7 @@
                                     <segue destination="sah-bW-BoK" kind="presentation" identifier="recordComment" id="ryl-BL-dQv"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter a numerical answer in this space provided" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PIb-lX-kCF">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="clip" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PIb-lX-kCF">
                                 <rect key="frame" x="20" y="1101.5" width="780" height="38.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -229,6 +229,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="MQk-eZ-BPy"/>
                     <connections>
+                        <outlet property="answerFieldLabel" destination="PIb-lX-kCF" id="JYf-fr-B56"/>
                         <outlet property="commentButton" destination="vGD-R9-7zT" id="2E5-0Z-boQ"/>
                         <outlet property="questionLabel" destination="eDP-Bu-okb" id="Amo-ow-vFw"/>
                         <outlet property="questionNumberLabel" destination="FsI-xU-kni" id="GpC-gZ-f1w"/>
@@ -245,7 +246,7 @@
             <objects>
                 <viewController id="sah-bW-BoK" customClass="RecordCommentViewController" customModule="Keyboard_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TLP-r3-9T4">
-                        <rect key="frame" x="0.0" y="0.0" width="704" height="995"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UeA-77-fXB">

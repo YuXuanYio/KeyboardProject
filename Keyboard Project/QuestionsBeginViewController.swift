@@ -34,6 +34,7 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var readyForNextQuestionButton: UIButton!
+    @IBOutlet weak var answerFieldLabel: UILabel!
     
     @IBAction func clearButton(_ sender: Any) {
         clearButtonPressed = true
@@ -60,6 +61,14 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         requestPermissionForMic()
         hideNextQuestionButtons()
         textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        if self.traitCollection.userInterfaceStyle == .dark {
+            textField.textColor = .black
+            answerFieldLabel.textColor = .black
+        } else {
+            textField.textColor = .white
+            answerFieldLabel.textColor = .white
+        }
+        answerFieldLabel.text = "Please enter a numerical answer in this space provided.\nYou can scribble over written answers to clear it."
     }
     
     func didGetTargetData(data: String) {
@@ -144,7 +153,6 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
                 try! csv.write(field: String(reactionTime))
             }
             self.hideNextQuestionButtons()
-            print(finalQuestionComments)
             if commentsRecorded == false {
                 try! csv.write(field: "-")
             } else {
