@@ -17,9 +17,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XYd-Vu-oMK">
-                                <rect key="frame" x="360" y="599.5" width="100" height="35"/>
+                                <rect key="frame" x="310" y="588" width="200" height="58"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="oo9-sZ-947"/>
+                                    <constraint firstAttribute="height" constant="58" id="aAY-Ba-T23"/>
+                                    <constraint firstAttribute="width" constant="200" id="oo9-sZ-947"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Begin"/>
@@ -27,19 +28,37 @@
                                     <segue destination="TjO-K5-sY4" kind="show" id="rLI-mm-nAi"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exclamationmark.triangle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="AJ8-Yx-1UT">
+                                <rect key="frame" x="25" y="85" width="35" height="48"/>
+                                <color key="tintColor" systemColor="systemRedColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="0aA-ps-1gO"/>
+                                    <constraint firstAttribute="height" constant="50" id="Tb4-8A-mTg"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Before starting, please note that an Apple Pencil is required for this application" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4mK-rZ-qd3">
+                                <rect key="frame" x="70" y="97" width="680.5" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lgN-3d-wcB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="XYd-Vu-oMK" firstAttribute="centerX" secondItem="lgN-3d-wcB" secondAttribute="centerX" id="AWU-br-fg8"/>
+                            <constraint firstItem="4mK-rZ-qd3" firstAttribute="leading" secondItem="AJ8-Yx-1UT" secondAttribute="trailing" constant="10" id="CtA-ZX-DIK"/>
+                            <constraint firstItem="4mK-rZ-qd3" firstAttribute="centerY" secondItem="AJ8-Yx-1UT" secondAttribute="centerY" id="bWp-x3-h5R"/>
+                            <constraint firstItem="AJ8-Yx-1UT" firstAttribute="top" secondItem="mWW-Oe-wbY" secondAttribute="topMargin" constant="10" id="df4-yu-XjC"/>
                             <constraint firstItem="XYd-Vu-oMK" firstAttribute="centerY" secondItem="lgN-3d-wcB" secondAttribute="centerY" id="eZE-ta-mVF"/>
+                            <constraint firstItem="4mK-rZ-qd3" firstAttribute="centerX" secondItem="lgN-3d-wcB" secondAttribute="centerX" id="q57-V3-dAq"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home Page" id="uaC-dh-U0h"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eTg-av-c11" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1028" y="-707"/>
+            <point key="canvasLocation" x="1027.3170731707316" y="-707.28813559322043"/>
         </scene>
         <!--Enter your details!-->
         <scene sceneID="iJu-Gh-2Qr">
@@ -457,6 +476,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="exclamationmark.triangle" catalog="system" width="128" height="109"/>
         <image name="mic2" width="170.66667175292969" height="170.66667175292969"/>
         <image name="x.circle" width="40" height="40"/>
         <systemColor name="labelColor">
@@ -464,6 +484,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
