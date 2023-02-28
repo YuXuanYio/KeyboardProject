@@ -72,7 +72,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
     }
     
     func addCSVFile(data: String, studentName: String) {
-        csvRef?.addDocument(data: ["data": data, "studentName": studentName]) {
+        csvRef?.addDocument(data: ["data": data, "studentName": studentName, "isSelected": false]) {
             error in
             if let error = error {
                 print("Error adding document: \(error)")
