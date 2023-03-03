@@ -56,7 +56,7 @@
 		D89093AC2952BEE700FC8EEA /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		D89093B029534A7E00FC8EEA /* MNIST.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MNIST.mlmodel; sourceTree = "<group>"; };
 		D89093B229534C9600FC8EEA /* mnistCNN.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = mnistCNN.mlmodel; sourceTree = "<group>"; };
-		D8B1B70029A8476800316A96 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D8B1B70029A8476800316A96 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = "Keyboard Project/README.md"; sourceTree = "<group>"; };
 		D8DBCC0629A730130095C063 /* RecordCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCommentViewController.swift; sourceTree = "<group>"; };
 		D8EE521629628A6900F84CEA /* StudentDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDetailsViewController.swift; sourceTree = "<group>"; };
 		D8EE52182963E4A400F84CEA /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
@@ -103,6 +103,7 @@
 		D890938A2952906800FC8EEA = {
 			isa = PBXGroup;
 			children = (
+				D8B1B70029A8476800316A96 /* README.md */,
 				D89093952952906800FC8EEA /* Keyboard Project */,
 				D89093942952906800FC8EEA /* Products */,
 			);
@@ -126,7 +127,6 @@
 				D89093962952906800FC8EEA /* AppDelegate.swift */,
 				D89093982952906800FC8EEA /* SceneDelegate.swift */,
 				D890939C2952906800FC8EEA /* Main.storyboard */,
-				D8B1B70029A8476800316A96 /* README.md */,
 				D8DBCC0629A730130095C063 /* RecordCommentViewController.swift */,
 				D890939F2952906D00FC8EEA /* Assets.xcassets */,
 				D89093A12952906D00FC8EEA /* LaunchScreen.storyboard */,
