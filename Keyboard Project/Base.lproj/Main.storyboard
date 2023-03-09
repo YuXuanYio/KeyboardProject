@@ -29,7 +29,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exclamationmark.triangle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="AJ8-Yx-1UT">
-                                <rect key="frame" x="25" y="85" width="35" height="48"/>
+                                <rect key="frame" x="24.5" y="85" width="34.999999999999986" height="48"/>
                                 <color key="tintColor" systemColor="systemRedColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="0aA-ps-1gO"/>
@@ -37,7 +37,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Before starting, please note that an Apple Pencil is required for this application" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4mK-rZ-qd3">
-                                <rect key="frame" x="70" y="97" width="680.5" height="24"/>
+                                <rect key="frame" x="69.5" y="97" width="681" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -203,7 +203,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="clip" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PIb-lX-kCF">
-                                <rect key="frame" x="20" y="1101.5" width="780" height="38.5"/>
+                                <rect key="frame" x="20" y="677" width="780" height="38.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -237,10 +237,10 @@
                             <constraint firstItem="eDP-Bu-okb" firstAttribute="centerX" secondItem="xDB-sL-3LQ" secondAttribute="centerX" id="GD7-nq-SnA"/>
                             <constraint firstItem="6dS-FN-OW7" firstAttribute="bottom" secondItem="vGD-R9-7zT" secondAttribute="bottom" id="Hjs-7n-Yqi"/>
                             <constraint firstItem="eDP-Bu-okb" firstAttribute="top" secondItem="FsI-xU-kni" secondAttribute="bottom" constant="30" id="IXD-Dd-mYG"/>
+                            <constraint firstItem="PIb-lX-kCF" firstAttribute="top" secondItem="UmK-Lb-6e6" secondAttribute="bottom" constant="40" id="R3s-Ks-7YF"/>
                             <constraint firstItem="UmK-Lb-6e6" firstAttribute="leading" secondItem="xDB-sL-3LQ" secondAttribute="leading" constant="20" id="Se5-ZP-oTi"/>
                             <constraint firstItem="UmK-Lb-6e6" firstAttribute="top" secondItem="vGD-R9-7zT" secondAttribute="top" id="ave-f6-PvS"/>
                             <constraint firstItem="xDB-sL-3LQ" firstAttribute="trailing" secondItem="PIb-lX-kCF" secondAttribute="trailing" constant="20" id="ceb-Pl-dV7"/>
-                            <constraint firstItem="xDB-sL-3LQ" firstAttribute="bottom" secondItem="PIb-lX-kCF" secondAttribute="bottom" constant="20" id="dR2-6F-VBG"/>
                             <constraint firstItem="6dS-FN-OW7" firstAttribute="top" secondItem="vGD-R9-7zT" secondAttribute="top" id="eRx-Qn-R8x"/>
                             <constraint firstItem="6dS-FN-OW7" firstAttribute="centerY" secondItem="xDB-sL-3LQ" secondAttribute="centerY" id="oHT-mL-Q3G"/>
                             <constraint firstItem="xDB-sL-3LQ" firstAttribute="trailing" secondItem="6dS-FN-OW7" secondAttribute="trailing" constant="20" id="v66-pW-WEg"/>
@@ -265,7 +265,7 @@
             <objects>
                 <viewController id="sah-bW-BoK" customClass="RecordCommentViewController" customModule="Keyboard_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TLP-r3-9T4">
-                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UeA-77-fXB">
@@ -285,7 +285,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PNd-1a-Ijc">
-                                        <rect key="frame" x="255" y="405.5" width="194.5" height="184.5"/>
+                                        <rect key="frame" x="254.5" y="405.5" width="195" height="184.5"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="mic2" title=""/>
                                     </button>

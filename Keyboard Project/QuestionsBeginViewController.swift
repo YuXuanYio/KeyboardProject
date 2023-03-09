@@ -68,7 +68,7 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
             textField.textColor = .white
             answerFieldLabel.textColor = .white
         }
-        answerFieldLabel.text = "Please enter a numerical answer in this space provided.\nYou can scribble over written answers to clear it."
+        answerFieldLabel.text = "Please enter a numerical answer in this space below.\nYou can scribble over written answers to clear it."
     }
     
     func didGetTargetData(data: String) {
