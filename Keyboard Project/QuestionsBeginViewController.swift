@@ -72,8 +72,10 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
     }
     
     func didGetTargetData(data: String) {
-        commentsRecorded = true
-        finalQuestionComments = data
+        if !data.isEmpty {
+            commentsRecorded = true
+            finalQuestionComments = data
+        }
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -218,6 +220,16 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
                 recordCommentVC.commentDelegate = self
             }
         }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "recordComment" {
+            if commentsRecorded == true {
+                displayMessage(title: "Error", message: "A comment has already been recorded for this question")
+                return false
+            }
+        }
+        return true
     }
     
     func displayMessage(title: String, message: String) {
