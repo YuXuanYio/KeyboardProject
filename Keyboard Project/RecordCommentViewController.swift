@@ -18,8 +18,7 @@ class RecordCommentViewController: UIViewController, SFSpeechRecognizerDelegate 
     let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer()
     let request = SFSpeechAudioBufferRecognitionRequest()
     var task: SFSpeechRecognitionTask!
-    var tempQuestionComments = ""
-    var finalQuestionComments = ""
+    var studentComments = ""
     var commentTimer: Timer?
     weak var commentDelegate: RecordCommentViewControllerDelegate?
     
@@ -44,22 +43,28 @@ class RecordCommentViewController: UIViewController, SFSpeechRecognizerDelegate 
             recordButton.imageView?.alpha = 0.5
             commentTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false) {
                 timer in
-                gesture.state = .ended
+                self.endRecording()
             }
         }
         if gesture.state == .ended {
-            cancelSpeechRecognition()
-            recordButton.isEnabled = false
-            if commentTimer?.isValid ?? true {
+            if commentTimer?.isValid ?? false {
                 commentTimer?.invalidate()
             }
-            recordButton.imageView?.alpha = 1.0
-            sendDataBack()
+            endRecording()
         }
     }
+
+    @objc func endRecording() {
+        cancelSpeechRecognition()
+        recordButton.isEnabled = false
+        recordButton.imageView?.alpha = 1.0
+        sendDataBack()
+    }
+
+
     
     func sendDataBack() {
-        commentDelegate?.didGetTargetData(data: finalQuestionComments)
+        commentDelegate?.didGetTargetData(data: studentComments)
     }
     
     func recordComment() {
@@ -97,8 +102,10 @@ class RecordCommentViewController: UIViewController, SFSpeechRecognizerDelegate 
                 return
             }
             let message = response.bestTranscription.formattedString
-            self.tempQuestionComments = message
-            self.commentTextView.text = "Your recorded comment: " + self.tempQuestionComments
+            if message != "" {
+                self.studentComments = message
+                self.commentTextView.text = "Your recorded comment: " + self.studentComments
+            }
         })
     }
     
@@ -109,8 +116,6 @@ class RecordCommentViewController: UIViewController, SFSpeechRecognizerDelegate 
         request.endAudio()
         audioEngine.stop()
         audioEngine.inputNode.removeTap(onBus: 0)
-        finalQuestionComments = tempQuestionComments
-        commentTextView.text = "Your recorded comment: " + finalQuestionComments
     }
     
     func requestPermissionForMic() {
