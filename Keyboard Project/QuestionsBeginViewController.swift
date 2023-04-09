@@ -58,7 +58,6 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
         try! csv.write(row: ["Name", "Date", "Problem", "Initial Answer", "Changed Answer", "Correct", "Reaction Time", "Comments"])
         beginNewCSVRow()
         try! csv.write(field: selectedQuestionList[0].question ?? "")
-        requestPermissionForMic()
         hideNextQuestionButtons()
         textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         if self.traitCollection.userInterfaceStyle == .dark {
@@ -189,23 +188,6 @@ class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, Datab
             }
         } else {
             displayMessage(title: "Error", message: "Please enter numerical answers only. Clear space provided and try again.")
-        }
-    }
-    
-    func requestPermissionForMic() {
-        SFSpeechRecognizer.requestAuthorization {
-            (authState) in
-            OperationQueue.main.addOperation {
-                if authState == .authorized {
-                    print("ACCEPTED")
-                } else if authState == .denied {
-                    self.displayMessage(title: "User denied permission", message: "Please enable microphone permissions in the settings")
-                } else if authState == .notDetermined {
-                    self.displayMessage(title: "Error", message: "Speech recognition unavailable on this device")
-                } else if authState == .restricted {
-                    self.displayMessage(title: "Error", message: "This device is restricted from using speech recognition")
-                }
-            }
         }
     }
     

@@ -118,23 +118,6 @@ class RecordCommentViewController: UIViewController, SFSpeechRecognizerDelegate 
         audioEngine.inputNode.removeTap(onBus: 0)
     }
     
-    func requestPermissionForMic() {
-        SFSpeechRecognizer.requestAuthorization {
-            (authState) in
-            OperationQueue.main.addOperation {
-                if authState == .authorized {
-                    print("ACCEPTED")
-                } else if authState == .denied {
-                    self.displayMessage(title: "User denied permission", message: "Please enable microphone permissions in the settings")
-                } else if authState == .notDetermined {
-                    self.displayMessage(title: "Error", message: "Speech recognition unavailable on this device")
-                } else if authState == .restricted {
-                    self.displayMessage(title: "Error", message: "This device is restricted from using speech recognition")
-                }
-            }
-        }
-    }
-    
     func displayMessage(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
