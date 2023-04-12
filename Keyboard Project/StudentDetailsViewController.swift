@@ -41,12 +41,6 @@ class StudentDetailsViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
     }
     
-    func displayMessage(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message,  preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
     func displayReadyMessage(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message,  preferredStyle: .alert)
         let alertActionNo = UIAlertAction(title: "No", style: .default, handler: nil)

@@ -30,6 +30,7 @@
 		D89093B129534A7F00FC8EEA /* MNIST.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D89093B029534A7E00FC8EEA /* MNIST.mlmodel */; };
 		D89093B329534C9600FC8EEA /* mnistCNN.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D89093B229534C9600FC8EEA /* mnistCNN.mlmodel */; };
 		D8DBCC0729A730130095C063 /* RecordCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DBCC0629A730130095C063 /* RecordCommentViewController.swift */; };
+		D8E7F92C29E3097200AA4942 /* DisplayMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F92B29E3097200AA4942 /* DisplayMessage.swift */; };
 		D8EE521729628A6900F84CEA /* StudentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EE521629628A6900F84CEA /* StudentDetailsViewController.swift */; };
 		D8EE52192963E4A400F84CEA /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EE52182963E4A400F84CEA /* Student.swift */; };
 		D8EE521B29642DCC00F84CEA /* QuestionsBeginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EE521A29642DCC00F84CEA /* QuestionsBeginViewController.swift */; };
@@ -58,6 +59,7 @@
 		D89093B229534C9600FC8EEA /* mnistCNN.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = mnistCNN.mlmodel; sourceTree = "<group>"; };
 		D8B1B70029A8476800316A96 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = "Keyboard Project/README.md"; sourceTree = "<group>"; };
 		D8DBCC0629A730130095C063 /* RecordCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCommentViewController.swift; sourceTree = "<group>"; };
+		D8E7F92B29E3097200AA4942 /* DisplayMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayMessage.swift; sourceTree = "<group>"; };
 		D8EE521629628A6900F84CEA /* StudentDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDetailsViewController.swift; sourceTree = "<group>"; };
 		D8EE52182963E4A400F84CEA /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		D8EE521A29642DCC00F84CEA /* QuestionsBeginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsBeginViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				D8EE521629628A6900F84CEA /* StudentDetailsViewController.swift */,
 				D8EE521A29642DCC00F84CEA /* QuestionsBeginViewController.swift */,
 				D8DBCC0629A730130095C063 /* RecordCommentViewController.swift */,
+				D8E7F92B29E3097200AA4942 /* DisplayMessage.swift */,
 			);
 			path = "Keyboard Project";
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 			files = (
 				D89093B129534A7F00FC8EEA /* MNIST.mlmodel in Sources */,
 				D8EE521729628A6900F84CEA /* StudentDetailsViewController.swift in Sources */,
+				D8E7F92C29E3097200AA4942 /* DisplayMessage.swift in Sources */,
 				D890939B2952906800FC8EEA /* QnAViewController.swift in Sources */,
 				D831673B2958874100CD658E /* Question.swift in Sources */,
 				D83167322958824A00CD658E /* HomePageViewController.swift in Sources */,
