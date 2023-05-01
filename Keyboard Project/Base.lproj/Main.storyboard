@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rgR-cJ-LdE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rgR-cJ-LdE">
     <device id="ipad10_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -29,7 +30,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exclamationmark.triangle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="AJ8-Yx-1UT">
-                                <rect key="frame" x="24.5" y="85" width="34.999999999999986" height="48"/>
+                                <rect key="frame" x="10" y="85" width="35" height="48"/>
                                 <color key="tintColor" systemColor="systemRedColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="0aA-ps-1gO"/>
@@ -37,7 +38,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Before starting, please note that an Apple Pencil is required for this application" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4mK-rZ-qd3">
-                                <rect key="frame" x="69.5" y="97" width="681" height="24"/>
+                                <rect key="frame" x="55" y="97" width="710" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -48,10 +49,12 @@
                         <constraints>
                             <constraint firstItem="XYd-Vu-oMK" firstAttribute="centerX" secondItem="lgN-3d-wcB" secondAttribute="centerX" id="AWU-br-fg8"/>
                             <constraint firstItem="4mK-rZ-qd3" firstAttribute="leading" secondItem="AJ8-Yx-1UT" secondAttribute="trailing" constant="10" id="CtA-ZX-DIK"/>
+                            <constraint firstItem="AJ8-Yx-1UT" firstAttribute="leading" secondItem="lgN-3d-wcB" secondAttribute="leading" constant="10" id="Yx7-aW-nj3"/>
                             <constraint firstItem="4mK-rZ-qd3" firstAttribute="centerY" secondItem="AJ8-Yx-1UT" secondAttribute="centerY" id="bWp-x3-h5R"/>
                             <constraint firstItem="AJ8-Yx-1UT" firstAttribute="top" secondItem="mWW-Oe-wbY" secondAttribute="topMargin" constant="10" id="df4-yu-XjC"/>
                             <constraint firstItem="XYd-Vu-oMK" firstAttribute="centerY" secondItem="lgN-3d-wcB" secondAttribute="centerY" id="eZE-ta-mVF"/>
                             <constraint firstItem="4mK-rZ-qd3" firstAttribute="centerX" secondItem="lgN-3d-wcB" secondAttribute="centerX" id="q57-V3-dAq"/>
+                            <constraint firstItem="4mK-rZ-qd3" firstAttribute="leading" secondItem="AJ8-Yx-1UT" secondAttribute="trailing" constant="10" id="qaM-12-SVW"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home Page" id="uaC-dh-U0h"/>
@@ -265,7 +268,7 @@
             <objects>
                 <viewController id="sah-bW-BoK" customClass="RecordCommentViewController" customModule="Keyboard_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TLP-r3-9T4">
-                        <rect key="frame" x="0.0" y="0.0" width="704" height="995"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UeA-77-fXB">
