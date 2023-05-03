@@ -9,7 +9,7 @@ import UIKit
 import CSV
 import Speech
 
-class QuestionsBeginViewController: UIViewController, UITextFieldDelegate, DatabaseListener, SFSpeechRecognizerDelegate, RecordCommentViewControllerDelegate {
+class QuestionsBeginViewController: UIViewController, DatabaseListener, SFSpeechRecognizerDelegate, RecordCommentViewControllerDelegate {
     
     var listenerType: ListenerType = .child
     var selectedQuestionList: [Question] = []

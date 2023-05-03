@@ -27,6 +27,9 @@ class StudentDetailsViewController: UIViewController {
         databaseController = appDelegate?.databaseController
         // Back button should be hidden before deployment at this stage students should not be able to view the questions
         super.viewDidLoad()
+        nameTextField.delegate = self
+        yearLevelTextField.delegate = self
+        hideKeyboardWhenTappedAround()
     }
     
     override func viewWillAppear(_ animated: Bool) {

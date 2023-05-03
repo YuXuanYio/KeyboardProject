@@ -14,6 +14,7 @@
 		D83167412958885000CD658E /* DatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D831673F2958884F00CD658E /* DatabaseProtocol.swift */; };
 		D83167422958885000CD658E /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83167402958884F00CD658E /* MulticastDelegate.swift */; };
 		D8316744295D339D00CD658E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8316743295D339D00CD658E /* GoogleService-Info.plist */; };
+		D83EE5A62A02A44100280CE4 /* TextFieldExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83EE5A52A02A43C00280CE4 /* TextFieldExtensions.swift */; };
 		D863C91F2977FD5800D47510 /* CSV in Frameworks */ = {isa = PBXBuildFile; productRef = D863C91E2977FD5800D47510 /* CSV */; };
 		D867930029668D3F00FD3C36 /* QuestionSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86792FF29668D3F00FD3C36 /* QuestionSet.swift */; };
 		D890718F2966946300181380 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D890718E2966946300181380 /* FirebaseAuth */; };
@@ -44,6 +45,7 @@
 		D831673F2958884F00CD658E /* DatabaseProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseProtocol.swift; sourceTree = "<group>"; };
 		D83167402958884F00CD658E /* MulticastDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		D8316743295D339D00CD658E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D83EE5A52A02A43C00280CE4 /* TextFieldExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldExtensions.swift; sourceTree = "<group>"; };
 		D86792FF29668D3F00FD3C36 /* QuestionSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSet.swift; sourceTree = "<group>"; };
 		D8907194296696B600181380 /* QuestionSetTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSetTableViewController.swift; sourceTree = "<group>"; };
 		D89093932952906800FC8EEA /* Keyboard Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Keyboard Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,6 +140,7 @@
 				D8EE521A29642DCC00F84CEA /* QuestionsBeginViewController.swift */,
 				D8DBCC0629A730130095C063 /* RecordCommentViewController.swift */,
 				D8E7F92B29E3097200AA4942 /* DisplayMessage.swift */,
+				D83EE5A52A02A43C00280CE4 /* TextFieldExtensions.swift */,
 			);
 			path = "Keyboard Project";
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				D80FDF27295495E400F25226 /* MNISTClassifier.mlmodel in Sources */,
 				D89093972952906800FC8EEA /* AppDelegate.swift in Sources */,
 				D8EE52192963E4A400F84CEA /* Student.swift in Sources */,
+				D83EE5A62A02A44100280CE4 /* TextFieldExtensions.swift in Sources */,
 				D89093AD2952BEE700FC8EEA /* CanvasView.swift in Sources */,
 				D83167422958885000CD658E /* MulticastDelegate.swift in Sources */,
 				D83167412958885000CD658E /* DatabaseProtocol.swift in Sources */,
