@@ -1,0 +1,8 @@
+# Ignore GoogleService-Info.plist
+GoogleService-Info.plist
+
+# Ignore all files in the build output directory
+build/*
+
+# Ignore all .xcuserstate files
+*.xcuserstate
